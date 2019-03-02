@@ -1,0 +1,39 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      changeDictionaryDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dictionaryReplacement
+{
+
+    T
+    {
+
+
+        boundaryField
+        {
+			".*(FLOOR|CEILING|BACK|SIDE).*"
+			{
+				type            compressible::turbulentHeatFluxTemperature;
+				heatSource      flux;
+				q               uniform 0;
+				kappa           fluidThermo;
+				kappaName       none;
+				Qr              Qr;
+				value           uniform 293.55;
+			}
+        }
+    }
+	
+}

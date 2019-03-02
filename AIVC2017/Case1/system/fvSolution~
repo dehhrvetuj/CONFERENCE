@@ -1,0 +1,102 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+/*   Windows 32 and 64 bit porting by blueCAPE: http://www.bluecape.com.pt   *\
+|  Based on Windows porting (2.0.x v4) by Symscape: http://www.symscape.com   |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    "(p_rgh|p)"
+    {
+        solver				GAMG;
+        smoother			DICGaussSeidel;
+	nPreSweeps      		0;
+        nPostSweeps     		2;
+        cacheAgglomeration 		true;
+        nCellsInCoarsestLevel 		10;
+        agglomerator     		faceAreaPair;
+        mergeLevels      		1;
+		
+	minIter				1;
+	maxIter				50;
+		
+	tolerance        		1e-7;
+        relTol           		0.01;
+    }
+	
+    "(U|h|T)"
+    {
+        solver          PBiCG;
+        preconditioner  DILU;
+		
+        tolerance       1e-9;
+        relTol          0.1;
+		
+	minIter				1;
+	maxIter				10;		
+    }
+	
+    "(k|epsilon|omega)"
+    {
+        solver          smoothSolver;
+        smoother        GaussSeidel; //symGaussSeidel;
+		
+        tolerance       1e-9;
+        relTol          0.1;
+		
+	minIter				1;
+	maxIter				20;		
+    }
+}
+
+SIMPLE
+{
+    momentumPredictor yes;
+    nNonOrthogonalCorrectors 0;
+    pRefCell        0;
+    pRefValue       0;
+	
+    residualControl
+    {
+        "(p_rgh|p)"     1e-7;
+        U               1e-8;
+        h               1e-8;
+
+        // possibly check turbulence fields
+        "(k|epsilon|omega)" 1e-8;
+    }
+}
+
+relaxationFactors
+{
+    fields
+    {
+        rho             1.0;
+	"(p_rgh|p)"		0.7;
+    }
+
+    equations
+    {
+        U               0.2;
+        h               0.3;
+		
+        "(k|epsilon|omega)" 0.7;
+    }
+}
+
+
+// ************************************************************************* //
