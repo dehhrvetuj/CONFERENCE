@@ -1,0 +1,1239 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : 2.3.1-bcfaaa7b8660
+Exec   : snappyHexMesh -parallel -overwrite
+Date   : May 17 2017
+Time   : 13:55:22
+Host   : "ubuntu"
+PID    : 3451
+Case   : /home/cong/Desktop/AIVC/Case5
+nProcs : 4
+Slaves : 
+3
+(
+"ubuntu.3452"
+"ubuntu.3453"
+"ubuntu.3454"
+)
+
+Pstream initialized with:
+    floatTransfer      : 0
+    nProcsSimpleSum    : 0
+    commsType          : nonBlocking
+    polling iterations : 0
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+Read mesh in = 0.54 s
+
+Overall mesh bounding box  : (-0.600000143 -1.43600005e-07 -0.000647945427) (0.600000024 2.44000006 2.46000004)
+Relative tolerance         : 1e-12
+Absolute matching distance : 3.66720464e-12
+
+Reading refinement surfaces.
+Read refinement surfaces in = 1.33 s
+
+Reading refinement shells.
+Refinement level according to distance to room.stl
+    level 1 for all cells within 0.06 metre.
+Refinement level according to distance to manikin.stl
+    level 4 for all cells within 0.012 metre.
+    level 3 for all cells within 0.03 metre.
+    level 2 for all cells within 0.06 metre.
+    level 1 for all cells within 0.12 metre.
+Read refinement shells in = 0 s
+
+Setting refinement level of surface to be consistent with shells.
+Checked shell refinement in = 1.11 s
+
+Reading features.
+Read edgeMesh room.eMesh
+    points      : 310
+    edges       : 336
+    boundingBox : (-0.600000143 -1.43600005e-07 -5.12999989e-08) (0.600000024 2.44000006 2.46000004)
+
+Refinement level according to distance to "room.eMesh" (310 points, 336 edges).
+    level 1 for all cells within 0 metre.
+Read edgeMesh manikin.eMesh
+    points      : 0
+    edges       : 0
+    boundingBox : (1e+300 1e+300 1e+300) (-1e+300 -1e+300 -1e+300)
+
+Refinement level according to distance to "manikin.eMesh" (0 points, 0 edges).
+    level 5 for all cells within 0 metre.
+--> FOAM Warning : 
+    From function treeBoundBox::treeBoundBox(const UList<point>&)
+    in file meshes/treeBoundBox/treeBoundBox.C at line 136
+    cannot find bounding box for zero-sized pointField, returning zero
+Read features in = 0.01 s
+
+
+Determining initial surface intersections
+-----------------------------------------
+
+Edge intersection testing:
+    Number of edges             : 3738736
+    Number of edges to retest   : 3738736
+    Number of intersected edges : 203115
+Calculated surface intersections in = 2.66 s
+
+Initial mesh : cells:1158681  faces:3738736  points:1456987
+Cells per refinement level:
+    0	44660
+    1	82081
+    2	94720
+    3	149303
+    4	678528
+    5	109389
+
+Adding patches for surface regions
+----------------------------------
+
+Patch Type                Region                        
+----- ----                ------                        
+room:
+
+1     wall                room_SIDE2                    
+2     wall                room_FLOOR                    
+3     wall                room_CEILING                  
+4     wall                room_BACK                     
+5     wall                room_SIDE1                    
+6     patch               room_INLET                    
+7     patch               room_OUTLET2                  
+8     patch               room_OUTLET1                  
+
+manikin:
+
+9     wall                manikin                       
+
+Added patches in = 0.01 s
+
+Selecting decompositionMethod ptscotch
+Layer thickness specified as first layer and expansion ratio.
+
+Shrinking and layer addition phase
+----------------------------------
+
+Using mesh parameters 
+{
+    maxNonOrtho     70;
+    maxBoundarySkewness 20;
+    maxInternalSkewness 4;
+    maxConcave      80;
+    minVol          1e-30;
+    minTetQuality   -1e+30;
+    minVolCollapseRatio -1;
+    minArea         -1;
+    minTwist        0.001;
+    minDeterminant  0.0001;
+    minFaceWeight   0.005;
+    minVolRatio     0.001;
+    minTriangleTwist -1;
+    nSmoothScale    4;
+    errorReduction  0.75;
+    relaxed
+    {
+        maxNonOrtho     75;
+        maxBoundarySkewness 20;
+        maxInternalSkewness 5;
+        maxConcave      80;
+        minVol          1e-60;
+        minTetQuality   -1e+30;
+        minArea         -1;
+        minTwist        -2;
+        minDeterminant  0;
+        minFaceWeight   0;
+        minVolRatio     0;
+    }
+}
+
+
+
+Merging all faces of a cell
+---------------------------
+    - which are on the same patch
+    - which make an angle < 180 degrees
+      (cos:-1)
+    - as long as the resulting face doesn't become concave by more than 90 degrees
+      (0=straight, 180=fully concave)
+
+Merging 1217 sets of faces.
+
+Edge intersection testing:
+    Number of edges             : 3736535
+    Number of edges to retest   : 9644
+    Number of intersected edges : 202235
+
+Undo iteration 0
+----------------
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 5
+    faces with face pyramid volume < 1e-30                 : 0
+    faces with concavity > 80  degrees                     : 38
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 0
+    faces on cells with determinant < 0.0001                : 0
+Masters that need to be restored:43
+Edge intersection testing:
+    Number of edges             : 3736586
+    Number of edges to retest   : 263
+    Number of intersected edges : 202286
+
+
+Undo iteration 1
+----------------
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-30                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 0
+    faces on cells with determinant < 0.0001                : 0
+
+Merging all points on surface that
+- are used by only two boundary faces and
+- make an angle with a cosine of more than -1.
+
+Removing 1933 straight edge points ...
+
+Edge intersection testing:
+    Number of edges             : 3736586
+    Number of edges to retest   : 16052
+    Number of intersected edges : 202831
+
+Undo iteration 0
+----------------
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-30                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 0
+    faces on cells with determinant < 0.0001                : 0
+
+Checking mesh manifoldness ...
+Outside of mesh is multiply connected across edges or points.
+This is not a fatal error but might cause some unexpected behaviour.
+
+
+Checking initial mesh ...
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-30                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 0
+    faces on cells with determinant < 0.0001                : 0
+Detected 0 illegal faces (concave, zero area or negative cell pyramid volume)
+
+Adding in total 0 inter-processor patches to handle extrusion of non-manifold processor boundaries.
+
+Handling points with inconsistent layer specification ...
+
+Handling non-manifold points ...
+
+Checking patch manifoldness ...
+Outside of local patch is multiply connected across edges or points at 0 points.
+Set displacement to zero for all 0 non-manifold points
+
+Handling feature edges ...
+
+Handling cells with warped patch faces ...
+Set displacement to zero on 1 warped faces since layer would be > 0.9 of the size of the bounding box.
+
+Growing non-extrusion points by one layer ...
+Set displacement to zero for an additional 18 points.
+
+patch        faces    layers avg thickness[m]
+                             near-wall overall
+-----        -----    ------ --------- -------
+room_SIDE2   9999     4      0.00481   0.0223  
+room_FLOOR   7799     4      0.00323   0.015   
+room_CEILING 4896     4      0.00481   0.0223  
+room_BACK    18282    4      0.0025    0.0116  
+room_SIDE1   9999     4      0.00481   0.0223  
+room_OUTLET2 316      4      0.0025    0.0116  
+room_OUTLET1 314      4      0.0025    0.0116  
+manikin      174548   6      0.00055   0.00425 
+
+Selecting externalDisplacementMeshMover displacementMedialAxis
+displacementMedialAxis : Calculating distance to Medial Axis ...
+displacementMedialAxis : Smoothing normals ...
+    Iteration 0   residual 0.0110837697
+    Iteration 10   residual 0.00443870526
+    Iteration 20   residual 0.00341602583
+    Iteration 30   residual 0.00290026604
+    Iteration 40   residual 0.00257105774
+    Iteration 50   residual 0.00233601375
+    Iteration 60   residual 0.00215707719
+    Iteration 70   residual 0.00201492142
+    Iteration 80   residual 0.00189852566
+    Iteration 90   residual 0.00180100793
+displacementMedialAxis : Inserting points on patch room_INLET if angle to nearest layer patch > 75 degrees.
+displacementMedialAxis : Smoothing normals in interior ...
+    Iteration 0   residual 0.029134165
+    Iteration 10   residual 0.00673659397
+    Iteration 20   residual 0.00537076262
+    Iteration 30   residual 0.00488152439
+    Iteration 40   residual 0.00463778678
+    Iteration 50   residual 0.0044882038
+    Iteration 60   residual 0.00438619617
+    Iteration 70   residual 0.00431228364
+    Iteration 80   residual 0.00425444876
+    Iteration 90   residual 0.00420931522
+
+Layer addition iteration 0
+--------------------------
+
+Determining displacement for added points according to pointNormal ...
+Detected 0 points with point normal pointing through faces.
+Reset displacement at 0 points to average of surrounding points.
+
+displacementMedialAxis : Smoothing using Medial Axis ...
+displacementMedialAxis : Reducing layer thickness at 127 nodes where thickness to medial axis distance is large 
+displacementMedialAxis : Removing isolated regions ...
+displacementMedialAxis : Number of isolated points extrusion stopped : 2
+displacementMedialAxis : Smoothing field ...
+    Iteration 0   residual 6.52688203e-06
+displacementMedialAxis : Moving mesh ...
+displacementMedialAxis : Iteration 0
+Moving mesh using displacement scaling : min:1  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 2303
+    faces with face pyramid volume < 1e-30                 : 677
+    faces with concavity > 80  degrees                     : 54
+    faces with skewness > 4   (internal) or 20  (boundary) : 1
+    faces with interpolation weights (0..1)  < 0.005       : 9
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 203
+    faces on cells with determinant < 0.0001                : 175
+displacementMedialAxis : Iteration 1
+Moving mesh using displacement scaling : min:0.75  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 179
+    faces with face pyramid volume < 1e-30                 : 14
+    faces with concavity > 80  degrees                     : 11
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 45
+    faces on cells with determinant < 0.0001                : 6
+displacementMedialAxis : Iteration 2
+Moving mesh using displacement scaling : min:0.5625  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 54
+    faces with face pyramid volume < 1e-30                 : 24
+    faces with concavity > 80  degrees                     : 7
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 1
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 36
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 3
+Moving mesh using displacement scaling : min:0.421875  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 38
+    faces with face pyramid volume < 1e-30                 : 27
+    faces with concavity > 80  degrees                     : 7
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 1
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 27
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 4
+Moving mesh using displacement scaling : min:0.31640625  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 33
+    faces with face pyramid volume < 1e-30                 : 28
+    faces with concavity > 80  degrees                     : 6
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 17
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 5
+Moving mesh using displacement scaling : min:0.237304688  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 31
+    faces with face pyramid volume < 1e-30                 : 26
+    faces with concavity > 80  degrees                     : 5
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 21
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 6
+Moving mesh using displacement scaling : min:0.177978516  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 28
+    faces with face pyramid volume < 1e-30                 : 25
+    faces with concavity > 80  degrees                     : 3
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 17
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 7
+Moving mesh using displacement scaling : min:0.133483887  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 28
+    faces with face pyramid volume < 1e-30                 : 23
+    faces with concavity > 80  degrees                     : 2
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 1
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 14
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 8
+Moving mesh using displacement scaling : min:0.100112915  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 29
+    faces with face pyramid volume < 1e-30                 : 20
+    faces with concavity > 80  degrees                     : 2
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 2
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 9
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 9
+Moving mesh using displacement scaling : min:0.0750846863  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 29
+    faces with face pyramid volume < 1e-30                 : 20
+    faces with concavity > 80  degrees                     : 1
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 9
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 10
+Moving mesh using displacement scaling : min:0.0563135147  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 29
+    faces with face pyramid volume < 1e-30                 : 18
+    faces with concavity > 80  degrees                     : 1
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 1
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 5
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 11
+Moving mesh using displacement scaling : min:0.042235136  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 28
+    faces with face pyramid volume < 1e-30                 : 19
+    faces with concavity > 80  degrees                     : 1
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 3
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 12
+Moving mesh using displacement scaling : min:0.031676352  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 29
+    faces with face pyramid volume < 1e-30                 : 19
+    faces with concavity > 80  degrees                     : 1
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 1
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 6
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 13
+Moving mesh using displacement scaling : min:0.023757264  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 27
+    faces with face pyramid volume < 1e-30                 : 18
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 5
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 14
+Moving mesh using displacement scaling : min:0.017817948  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 27
+    faces with face pyramid volume < 1e-30                 : 17
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 1
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 4
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 15
+Moving mesh using displacement scaling : min:0.013363461  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 27
+    faces with face pyramid volume < 1e-30                 : 17
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 6
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 16
+Moving mesh using displacement scaling : min:0.0100225958  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 26
+    faces with face pyramid volume < 1e-30                 : 15
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 4
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 17
+Moving mesh using displacement scaling : min:0.00751694682  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 26
+    faces with face pyramid volume < 1e-30                 : 13
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 1
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 3
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 18
+Moving mesh using displacement scaling : min:0.00563771011  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 26
+    faces with face pyramid volume < 1e-30                 : 12
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 1
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 3
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 19
+Moving mesh using displacement scaling : min:0.00422828259  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 25
+    faces with face pyramid volume < 1e-30                 : 13
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 3
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 20
+displacementMedialAxis : Displacement scaling for error reduction set to 0.
+Moving mesh using displacement scaling : min:0.00317121194  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 25
+    faces with face pyramid volume < 1e-30                 : 13
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 3
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 21
+Moving mesh using displacement scaling : min:0  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 9
+    faces with face pyramid volume < 1e-30                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 5
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 22
+Moving mesh using displacement scaling : min:0  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 4
+    faces with face pyramid volume < 1e-30                 : 4
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 1
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 23
+Moving mesh using displacement scaling : min:0  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-30                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 7
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 24
+Moving mesh using displacement scaling : min:0  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-30                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 0
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Successfully moved mesh
+displacementMedialAxis : Finished moving mesh ...
+truncateDisplacement : Unextruded 1 faces due to non-consecutive vertices being extruded.
+truncateDisplacement : Unextruded 1 faces due to stringed edges with inconsistent extrusion.
+truncateDisplacement : Unextruded 0 faces due to non-consecutive vertices being extruded.
+truncateDisplacement : Unextruded 0 faces due to stringed edges with inconsistent extrusion.
+
+Setting up information for layer truncation ...
+
+Checking mesh with layer ...
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 560
+    faces with face pyramid volume < 1e-30                 : 166
+    faces with concavity > 80  degrees                     : 4
+    faces with skewness > 4   (internal) or 20  (boundary) : 68
+    faces with interpolation weights (0..1)  < 0.005       : 3
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 173
+    faces on cells with determinant < 0.0001                : 0
+Detected 974 illegal faces (concave, zero area or negative cell pyramid volume)
+[1] Checked mesh with layers. Disabled extrusion at 
+[1]     (-0.139248939 0.801968839 0.00175473523)
+[1]     (-0.148473235 0.811945192 0.00282990412)
+[2] Checked mesh with layers. Disabled extrusion at 
+[2]     (-0.00811362992 1.19732509 1.1998422)
+[2]     (0.0782642703 1.26704991 1.24583589)
+[3] Checked mesh with layers. Disabled extrusion at 
+[3]     (-0.0334193905 2.42839756 1.98277404)
+[3]     (0.0334194256 2.42839756 1.98277398)
+[0] Checked mesh with layers. Disabled extrusion at 
+[0]     (0.174515906 0.803058308 0.00315184596)
+[0]     (0.160693011 0.748325552 0.00287570037)
+Suppressed disabled extrusion message for other 214 faces.
+Extruding 225765 out of 226153 faces (99.8284347%). Removed extrusion at 222 faces.
+Added 1241119 out of 1253950 cells (98.9767535%).
+
+Growing non-extrusion points by one layer ...
+Set displacement to zero for an additional 1532 points.
+
+
+Layer addition iteration 1
+--------------------------
+
+Determining displacement for added points according to pointNormal ...
+Detected 0 points with point normal pointing through faces.
+Reset displacement at 0 points to average of surrounding points.
+
+displacementMedialAxis : Smoothing using Medial Axis ...
+displacementMedialAxis : Reducing layer thickness at 71 nodes where thickness to medial axis distance is large 
+displacementMedialAxis : Removing isolated regions ...
+displacementMedialAxis : Number of isolated points extrusion stopped : 54
+displacementMedialAxis : Smoothing field ...
+    Iteration 0   residual 8.32396136e-06
+displacementMedialAxis : Moving mesh ...
+displacementMedialAxis : Iteration 0
+Moving mesh using displacement scaling : min:1  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 1975
+    faces with face pyramid volume < 1e-30                 : 621
+    faces with concavity > 80  degrees                     : 48
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 7
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 196
+    faces on cells with determinant < 0.0001                : 162
+displacementMedialAxis : Iteration 1
+Moving mesh using displacement scaling : min:0.75  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 85
+    faces with face pyramid volume < 1e-30                 : 4
+    faces with concavity > 80  degrees                     : 4
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 1
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 41
+    faces on cells with determinant < 0.0001                : 2
+displacementMedialAxis : Iteration 2
+Moving mesh using displacement scaling : min:0.5625  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 10
+    faces with face pyramid volume < 1e-30                 : 5
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 25
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 3
+Moving mesh using displacement scaling : min:0.421875  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 1
+    faces with face pyramid volume < 1e-30                 : 5
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 10
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 4
+Moving mesh using displacement scaling : min:0.31640625  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 1
+    faces with face pyramid volume < 1e-30                 : 4
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 4
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 5
+Moving mesh using displacement scaling : min:0.237304688  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 1
+    faces with face pyramid volume < 1e-30                 : 3
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 6
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 6
+Moving mesh using displacement scaling : min:0.177978516  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 1
+    faces with face pyramid volume < 1e-30                 : 1
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 3
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 7
+Moving mesh using displacement scaling : min:0.133483887  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 1
+    faces with face pyramid volume < 1e-30                 : 1
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 2
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 8
+Moving mesh using displacement scaling : min:0.100112915  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 1
+    faces with face pyramid volume < 1e-30                 : 1
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 2
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 9
+Moving mesh using displacement scaling : min:0.0750846863  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 1
+    faces with face pyramid volume < 1e-30                 : 1
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 0
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 10
+Moving mesh using displacement scaling : min:0.0563135147  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 1
+    faces with face pyramid volume < 1e-30                 : 1
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 0
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 11
+Moving mesh using displacement scaling : min:0.042235136  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 1
+    faces with face pyramid volume < 1e-30                 : 1
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 0
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 12
+Moving mesh using displacement scaling : min:0.031676352  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 1
+    faces with face pyramid volume < 1e-30                 : 1
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 0
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 13
+Moving mesh using displacement scaling : min:0.023757264  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 1
+    faces with face pyramid volume < 1e-30                 : 1
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 0
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 14
+Moving mesh using displacement scaling : min:0.017817948  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-30                 : 1
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 0
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 15
+Moving mesh using displacement scaling : min:0.013363461  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-30                 : 1
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 0
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 16
+Moving mesh using displacement scaling : min:0.0100225958  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-30                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 1
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 0
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 17
+Moving mesh using displacement scaling : min:0.00751694682  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-30                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 1
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 0
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 18
+Moving mesh using displacement scaling : min:0.00563771011  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-30                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 1
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 0
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 19
+Moving mesh using displacement scaling : min:0.00422828259  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-30                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 1
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 0
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 20
+displacementMedialAxis : Displacement scaling for error reduction set to 0.
+Moving mesh using displacement scaling : min:0.00317121194  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-30                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 1
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 0
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 21
+Moving mesh using displacement scaling : min:0  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-30                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 1
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Iteration 22
+Moving mesh using displacement scaling : min:0  max:1
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 0
+    faces with face pyramid volume < 1e-30                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 0
+    faces on cells with determinant < 0.0001                : 0
+displacementMedialAxis : Successfully moved mesh
+displacementMedialAxis : Finished moving mesh ...
+truncateDisplacement : Unextruded 2 faces due to non-consecutive vertices being extruded.
+truncateDisplacement : Unextruded 5 faces due to stringed edges with inconsistent extrusion.
+truncateDisplacement : Unextruded 0 faces due to non-consecutive vertices being extruded.
+truncateDisplacement : Unextruded 0 faces due to stringed edges with inconsistent extrusion.
+
+Setting up information for layer truncation ...
+
+Checking mesh with layer ...
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 1
+    faces with face pyramid volume < 1e-30                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 0
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 5
+    faces on cells with determinant < 0.0001                : 0
+Detected 6 illegal faces (concave, zero area or negative cell pyramid volume)
+[0] Checked mesh with layers. Disabled extrusion at 
+[0]     (0.230995564 1.1668352 0.476781705)
+[0]     (0.0110459634 1.43792407 0.551449999)
+[0]     (0.242475395 1.19182013 0.463968422)
+[1] Checked mesh with layers. Disabled extrusion at 
+[1]     (-0.0573071572 1.21338409 0.624119087)
+[1]     (-0.242723396 1.16019497 0.446207265)
+Extruding 224759 out of 226153 faces (99.3836031%). Removed extrusion at 5 faces.
+Added 1219368 out of 1253950 cells (97.2421548%).
+
+Growing non-extrusion points by one layer ...
+Set displacement to zero for an additional 2045 points.
+
+
+Layer addition iteration 2
+--------------------------
+Switched to relaxed meshQuality constraints.
+
+Determining displacement for added points according to pointNormal ...
+Detected 0 points with point normal pointing through faces.
+Reset displacement at 0 points to average of surrounding points.
+
+displacementMedialAxis : Smoothing using Medial Axis ...
+displacementMedialAxis : Reducing layer thickness at 32 nodes where thickness to medial axis distance is large 
+displacementMedialAxis : Removing isolated regions ...
+displacementMedialAxis : Number of isolated points extrusion stopped : 85
+displacementMedialAxis : Smoothing field ...
+    Iteration 0   residual 8.80564428e-06
+displacementMedialAxis : Moving mesh ...
+displacementMedialAxis : Iteration 0
+Moving mesh using displacement scaling : min:1  max:1
+Checking faces in error :
+    non-orthogonality > 75  degrees                        : 1433
+    faces with face pyramid volume < 1e-60                 : 613
+    faces with concavity > 80  degrees                     : 46
+    faces with skewness > 5   (internal) or 20  (boundary) : 2
+    faces with interpolation weights (0..1)  < 0           : 0
+    faces with volume ratio of neighbour cells < 0         : 0
+    faces on cells with determinant < 0                    : 0
+displacementMedialAxis : Iteration 1
+Moving mesh using displacement scaling : min:0.75  max:1
+Checking faces in error :
+    non-orthogonality > 75  degrees                        : 36
+    faces with face pyramid volume < 1e-60                 : 14
+    faces with concavity > 80  degrees                     : 1
+    faces with skewness > 5   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0           : 0
+    faces with volume ratio of neighbour cells < 0         : 0
+    faces on cells with determinant < 0                    : 0
+displacementMedialAxis : Iteration 2
+Moving mesh using displacement scaling : min:0.5625  max:1
+Checking faces in error :
+    non-orthogonality > 75  degrees                        : 12
+    faces with face pyramid volume < 1e-60                 : 14
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 5   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0           : 0
+    faces with volume ratio of neighbour cells < 0         : 0
+    faces on cells with determinant < 0                    : 0
+displacementMedialAxis : Iteration 3
+Moving mesh using displacement scaling : min:0.421875  max:1
+Checking faces in error :
+    non-orthogonality > 75  degrees                        : 12
+    faces with face pyramid volume < 1e-60                 : 12
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 5   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0           : 0
+    faces with volume ratio of neighbour cells < 0         : 0
+    faces on cells with determinant < 0                    : 0
+displacementMedialAxis : Iteration 4
+Moving mesh using displacement scaling : min:0.31640625  max:1
+Checking faces in error :
+    non-orthogonality > 75  degrees                        : 4
+    faces with face pyramid volume < 1e-60                 : 13
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 5   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0           : 0
+    faces with volume ratio of neighbour cells < 0         : 0
+    faces on cells with determinant < 0                    : 0
+displacementMedialAxis : Iteration 5
+Moving mesh using displacement scaling : min:0.237304688  max:1
+Checking faces in error :
+    non-orthogonality > 75  degrees                        : 3
+    faces with face pyramid volume < 1e-60                 : 17
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 5   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0           : 0
+    faces with volume ratio of neighbour cells < 0         : 0
+    faces on cells with determinant < 0                    : 0
+displacementMedialAxis : Iteration 6
+Moving mesh using displacement scaling : min:0.177978516  max:1
+Checking faces in error :
+    non-orthogonality > 75  degrees                        : 4
+    faces with face pyramid volume < 1e-60                 : 12
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 5   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0           : 0
+    faces with volume ratio of neighbour cells < 0         : 0
+    faces on cells with determinant < 0                    : 0
+displacementMedialAxis : Iteration 7
+Moving mesh using displacement scaling : min:0.133483887  max:1
+Checking faces in error :
+    non-orthogonality > 75  degrees                        : 2
+    faces with face pyramid volume < 1e-60                 : 14
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 5   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0           : 0
+    faces with volume ratio of neighbour cells < 0         : 0
+    faces on cells with determinant < 0                    : 0
+displacementMedialAxis : Iteration 8
+Moving mesh using displacement scaling : min:0.100112915  max:1
+Checking faces in error :
+    non-orthogonality > 75  degrees                        : 1
+    faces with face pyramid volume < 1e-60                 : 15
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 5   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0           : 0
+    faces with volume ratio of neighbour cells < 0         : 0
+    faces on cells with determinant < 0                    : 0
+displacementMedialAxis : Iteration 9
+Moving mesh using displacement scaling : min:0.0750846863  max:1
+Checking faces in error :
+    non-orthogonality > 75  degrees                        : 1
+    faces with face pyramid volume < 1e-60                 : 11
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 5   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0           : 0
+    faces with volume ratio of neighbour cells < 0         : 0
+    faces on cells with determinant < 0                    : 0
+displacementMedialAxis : Iteration 10
+Moving mesh using displacement scaling : min:0.0563135147  max:1
+Checking faces in error :
+    non-orthogonality > 75  degrees                        : 1
+    faces with face pyramid volume < 1e-60                 : 11
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 5   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0           : 0
+    faces with volume ratio of neighbour cells < 0         : 0
+    faces on cells with determinant < 0                    : 0
+displacementMedialAxis : Iteration 11
+Moving mesh using displacement scaling : min:0.042235136  max:1
+Checking faces in error :
+    non-orthogonality > 75  degrees                        : 2
+    faces with face pyramid volume < 1e-60                 : 9
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 5   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0           : 0
+    faces with volume ratio of neighbour cells < 0         : 0
+    faces on cells with determinant < 0                    : 0
+displacementMedialAxis : Iteration 12
+Moving mesh using displacement scaling : min:0.031676352  max:1
+Checking faces in error :
+    non-orthogonality > 75  degrees                        : 1
+    faces with face pyramid volume < 1e-60                 : 9
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 5   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0           : 0
+    faces with volume ratio of neighbour cells < 0         : 0
+    faces on cells with determinant < 0                    : 0
+displacementMedialAxis : Iteration 13
+Moving mesh using displacement scaling : min:0.023757264  max:1
+Checking faces in error :
+    non-orthogonality > 75  degrees                        : 1
+    faces with face pyramid volume < 1e-60                 : 7
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 5   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0           : 0
+    faces with volume ratio of neighbour cells < 0         : 0
+    faces on cells with determinant < 0                    : 0
+displacementMedialAxis : Iteration 14
+Moving mesh using displacement scaling : min:0.017817948  max:1
+Checking faces in error :
+    non-orthogonality > 75  degrees                        : 1
+    faces with face pyramid volume < 1e-60                 : 6
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 5   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0           : 0
+    faces with volume ratio of neighbour cells < 0         : 0
+    faces on cells with determinant < 0                    : 0
+displacementMedialAxis : Iteration 15
+Moving mesh using displacement scaling : min:0.013363461  max:1
+Checking faces in error :
+    non-orthogonality > 75  degrees                        : 1
+    faces with face pyramid volume < 1e-60                 : 6
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 5   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0           : 0
+    faces with volume ratio of neighbour cells < 0         : 0
+    faces on cells with determinant < 0                    : 0
+displacementMedialAxis : Iteration 16
+Moving mesh using displacement scaling : min:0.0100225958  max:1
+Checking faces in error :
+    non-orthogonality > 75  degrees                        : 1
+    faces with face pyramid volume < 1e-60                 : 6
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 5   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0           : 0
+    faces with volume ratio of neighbour cells < 0         : 0
+    faces on cells with determinant < 0                    : 0
+displacementMedialAxis : Iteration 17
+Moving mesh using displacement scaling : min:0.00751694682  max:1
+Checking faces in error :
+    non-orthogonality > 75  degrees                        : 1
+    faces with face pyramid volume < 1e-60                 : 6
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 5   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0           : 0
+    faces with volume ratio of neighbour cells < 0         : 0
+    faces on cells with determinant < 0                    : 0
+displacementMedialAxis : Iteration 18
+Moving mesh using displacement scaling : min:0.00563771011  max:1
+Checking faces in error :
+    non-orthogonality > 75  degrees                        : 1
+    faces with face pyramid volume < 1e-60                 : 6
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 5   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0           : 0
+    faces with volume ratio of neighbour cells < 0         : 0
+    faces on cells with determinant < 0                    : 0
+displacementMedialAxis : Iteration 19
+Moving mesh using displacement scaling : min:0.00422828259  max:1
+Checking faces in error :
+    non-orthogonality > 75  degrees                        : 1
+    faces with face pyramid volume < 1e-60                 : 6
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 5   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0           : 0
+    faces with volume ratio of neighbour cells < 0         : 0
+    faces on cells with determinant < 0                    : 0
+displacementMedialAxis : Iteration 20
+displacementMedialAxis : Displacement scaling for error reduction set to 0.
+Moving mesh using displacement scaling : min:0.00317121194  max:1
+Checking faces in error :
+    non-orthogonality > 75  degrees                        : 1
+    faces with face pyramid volume < 1e-60                 : 4
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 5   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0           : 0
+    faces with volume ratio of neighbour cells < 0         : 0
+    faces on cells with determinant < 0                    : 0
+displacementMedialAxis : Iteration 21
+Moving mesh using displacement scaling : min:0  max:1
+Checking faces in error :
+    non-orthogonality > 75  degrees                        : 0
+    faces with face pyramid volume < 1e-60                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 5   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0           : 0
+    faces with volume ratio of neighbour cells < 0         : 0
+    faces on cells with determinant < 0                    : 0
+displacementMedialAxis : Successfully moved mesh
+displacementMedialAxis : Finished moving mesh ...
+truncateDisplacement : Unextruded 0 faces due to non-consecutive vertices being extruded.
+truncateDisplacement : Unextruded 6 faces due to stringed edges with inconsistent extrusion.
+truncateDisplacement : Unextruded 0 faces due to non-consecutive vertices being extruded.
+truncateDisplacement : Unextruded 0 faces due to stringed edges with inconsistent extrusion.
+
+Setting up information for layer truncation ...
+
+Checking mesh with layer ...
+Checking faces in error :
+    non-orthogonality > 75  degrees                        : 0
+    faces with face pyramid volume < 1e-60                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 5   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0           : 0
+    faces with volume ratio of neighbour cells < 0         : 0
+    faces on cells with determinant < 0                    : 0
+Detected 0 illegal faces (concave, zero area or negative cell pyramid volume)
+Extruding 223303 out of 226153 faces (98.7397912%). Removed extrusion at 0 faces.
+Added 1204610 out of 1253950 cells (96.0652339%).
+Edge intersection testing:
+    Number of edges             : 7553327
+    Number of edges to retest   : 0
+    Number of intersected edges : 1253613
+
+Doing final balancing
+---------------------
+
+
+patch        faces    layers   overall thickness
+                               [m]       [%]
+-----        -----    ------   ---       ---
+room_SIDE2   9999     4        0.0224    99.6    
+room_FLOOR   7799     3.62     0.0148    88.9    
+room_CEILING 4896     4        0.0224    99.6    
+room_BACK    18282    3.99     0.0116    99.7    
+room_SIDE1   9999     4        0.0224    99.6    
+room_OUTLET2 316      4        0.0116    100     
+room_OUTLET1 314      3.4      0.0101    87.4    
+manikin      174548   5.74     0.00416   96.8    
+
+Layer mesh : cells:2363291  faces:7553327  points:2863782
+Cells per refinement level:
+    0	44660
+    1	193469
+    2	178524
+    3	152706
+    4	1484149
+    5	309783
+Writing mesh to time constant
+Wrote mesh in = 143.99 s.
+Layers added in = 143.99 s.
+Checking final mesh ...
+Checking faces in error :
+    non-orthogonality > 70  degrees                        : 130
+    faces with face pyramid volume < 1e-30                 : 0
+    faces with concavity > 80  degrees                     : 0
+    faces with skewness > 4   (internal) or 20  (boundary) : 0
+    faces with interpolation weights (0..1)  < 0.005       : 1
+    faces with volume ratio of neighbour cells < 0.001     : 0
+    faces with face twist < 0.001                          : 114
+    faces on cells with determinant < 0.0001                : 15
+Finished meshing with 260 illegal faces (concave, zero area or negative cell pyramid volume)
+Finished meshing in = 151.91 s.
+End
+
+Finalising parallel run

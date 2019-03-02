@@ -1,0 +1,1569 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : 2.3.1-bcfaaa7b8660
+Exec   : buoyantSimpleFoam -parallel
+Date   : May 19 2017
+Time   : 12:59:19
+Host   : "ubuntu"
+PID    : 9117
+Case   : /home/cong/Desktop/AIVC/Case5
+nProcs : 4
+Slaves : 
+3
+(
+"ubuntu.9118"
+"ubuntu.9119"
+"ubuntu.9120"
+)
+
+Pstream initialized with:
+    floatTransfer      : 0
+    nProcsSimpleSum    : 0
+    commsType          : nonBlocking
+    polling iterations : 0
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 6000
+
+
+Reading g
+Reading thermophysical properties
+
+Selecting thermodynamics package 
+{
+    type            heRhoThermo;
+    mixture         pureMixture;
+    transport       const;
+    thermo          hConst;
+    equationOfState perfectGas;
+    specie          specie;
+    energy          sensibleEnthalpy;
+}
+
+Reading field U
+
+Reading/calculating face flux field phi
+
+Creating turbulence model
+
+Selecting RAS turbulence model kEpsilon
+kEpsilonCoeffs
+{
+    Cmu             0.09;
+    C1              1.44;
+    C2              1.92;
+    C3              -0.33;
+    sigmak          1;
+    sigmaEps        1.3;
+    Prt             1;
+}
+
+Calculating field g.h
+
+Reading field p_rgh
+
+No finite volume options present
+
+Selecting radiationModel none
+
+SIMPLE: convergence criteria
+    field "(p_rgh|p)"	 tolerance 1e-07
+    field U	 tolerance 1e-08
+    field h	 tolerance 1e-08
+    field "(k|epsilon|omega)"	 tolerance 1e-08
+
+
+Starting time loop
+
+forceCoeffs forceCoeffs1:
+    Not including porosity effects
+
+Time = 6001
+
+DILUPBiCG:  Solving for Ux, Initial residual = 0.00819616103, Final residual = 6.27404535e-05, No Iterations 1
+DILUPBiCG:  Solving for Uy, Initial residual = 0.00956727176, Final residual = 7.47705e-05, No Iterations 1
+DILUPBiCG:  Solving for Uz, Initial residual = 0.0078897851, Final residual = 6.35103741e-05, No Iterations 1
+DILUPBiCG:  Solving for h, Initial residual = 0.00459868258, Final residual = 4.36376064e-05, No Iterations 1
+GAMG:  Solving for p_rgh, Initial residual = 0.19467822, Final residual = 0.00181887073, No Iterations 2
+time step continuity errors : sum local = 0.000301717245, global = -7.00553854e-05, cumulative = -7.00553854e-05
+rho max/min : 1.20356623 1.14723596
+smoothSolver:  Solving for epsilon, Initial residual = 0.182650763, Final residual = 0.013863465, No Iterations 3
+smoothSolver:  Solving for k, Initial residual = 1, Final residual = 0.0861911697, No Iterations 3
+ExecutionTime = 21 s  ClockTime = 22 s
+
+wallHeatFlux wallHeatFlux output:
+
+Wall heat fluxes [W]
+room_SIDE2
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933255, average = 293.575554
+room_FLOOR
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823541, max = 306.347195, average = 293.464295
+room_CEILING
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 293.932362, max = 293.932534, average = 293.932416
+room_BACK
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.817364, max = 293.932564, average = 293.603422
+room_SIDE1
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933255, average = 293.57281
+manikin
+    convective: 202.110184
+    radiative:  -0
+    total:      202.110184
+    Temperature : min = 307.15, max = 307.15, average = 307.15
+
+yPlusRAS yplusRAS output:
+    patch room_SIDE2 y+ : min = 0.282392693, max = 6.89484358, average = 3.4974194
+    patch room_FLOOR y+ : min = 0.128216937, max = 7.19372826, average = 2.66776838
+    patch room_CEILING y+ : min = 0.196130058, max = 6.57548663, average = 3.27652018
+    patch room_BACK y+ : min = 0.334987511, max = 51.5097389, average = 4.39386861
+    patch room_SIDE1 y+ : min = 0.351850357, max = 6.69271656, average = 3.5115353
+    patch manikin y+ : min = 0.0309940049, max = 7.87818234, average = 0.975980465
+
+yPlusRASLowRe yplusRASLowRe output:
+room_SIDE2
+    y+ : min = 0.282392693, max = 6.89484358, average = 3.4974194
+    y : min = 0.000544684214, max = 0.00250000001, average = 0.00234603179
+room_FLOOR
+    y+ : min = 0.128216937, max = 7.19372826, average = 2.66776838
+    y : min = 0.000139430812, max = 0.00249999971, average = 0.00161917022
+room_CEILING
+    y+ : min = 0.196130058, max = 6.57548663, average = 3.27652018
+    y : min = 0.000647142072, max = 0.00249999973, average = 0.00231379284
+room_BACK
+    y+ : min = 0.334987511, max = 51.5097389, average = 4.39386861
+    y : min = 0.000872666798, max = 0.00549005797, average = 0.00123342378
+room_SIDE1
+    y+ : min = 0.351850357, max = 6.69271656, average = 3.5115353
+    y : min = 0.000544684643, max = 0.0025, average = 0.00234602486
+manikin
+    y+ : min = 0.0309940049, max = 7.87818234, average = 0.975980465
+    y : min = 4.97449872e-05, max = 0.00255854003, average = 0.000292020944
+
+forceCoeffs forceCoeffs1 output:
+    Cm    = -4492.96098
+    Cd    = -97.556859
+    Cl    = -8651.06905
+    Cl(f) = -8818.4955
+    Cl(r) = 167.426451
+
+Time = 6002
+
+DILUPBiCG:  Solving for Ux, Initial residual = 0.00491951343, Final residual = 5.78763731e-05, No Iterations 1
+DILUPBiCG:  Solving for Uy, Initial residual = 0.00681270005, Final residual = 7.75238737e-05, No Iterations 1
+DILUPBiCG:  Solving for Uz, Initial residual = 0.00535872436, Final residual = 6.58399337e-05, No Iterations 1
+DILUPBiCG:  Solving for h, Initial residual = 0.00234759077, Final residual = 2.77911396e-05, No Iterations 1
+GAMG:  Solving for p_rgh, Initial residual = 0.693396963, Final residual = 0.0067219498, No Iterations 2
+time step continuity errors : sum local = 0.0017013427, global = -0.000248152767, cumulative = -0.000318208153
+rho max/min : 1.20358576 1.14719984
+smoothSolver:  Solving for epsilon, Initial residual = 0.253494311, Final residual = 0.0150741279, No Iterations 4
+bounding epsilon, min: -0.000117617206 max: 67.29435 average: 0.0290611436
+smoothSolver:  Solving for k, Initial residual = 0.609549336, Final residual = 0.0456475135, No Iterations 4
+ExecutionTime = 39.2 s  ClockTime = 40 s
+
+wallHeatFlux wallHeatFlux output:
+
+Wall heat fluxes [W]
+room_SIDE2
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933258, average = 293.575359
+room_FLOOR
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823555, max = 306.356202, average = 293.46729
+room_CEILING
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 293.932359, max = 293.932535, average = 293.932416
+room_BACK
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.817608, max = 293.932565, average = 293.603192
+room_SIDE1
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823843, max = 293.933258, average = 293.572587
+manikin
+    convective: 213.928679
+    radiative:  -0
+    total:      213.928679
+    Temperature : min = 307.15, max = 307.15, average = 307.15
+
+yPlusRAS yplusRAS output:
+    patch room_SIDE2 y+ : min = 0.323351884, max = 6.92671273, average = 3.75858235
+    patch room_FLOOR y+ : min = 0.173881729, max = 7.30140949, average = 2.88368588
+    patch room_CEILING y+ : min = 0.701397889, max = 6.56351949, average = 3.51551551
+    patch room_BACK y+ : min = 0.304629201, max = 51.0513392, average = 4.29273464
+    patch room_SIDE1 y+ : min = 0.47483602, max = 6.78626089, average = 3.77541988
+    patch manikin y+ : min = 0.0473646346, max = 7.87562844, average = 1.04345667
+
+yPlusRASLowRe yplusRASLowRe output:
+room_SIDE2
+    y+ : min = 0.323351884, max = 6.92671273, average = 3.75858235
+    y : min = 0.000544684214, max = 0.00250000001, average = 0.00234603179
+room_FLOOR
+    y+ : min = 0.173881729, max = 7.30140949, average = 2.88368588
+    y : min = 0.000139430812, max = 0.00249999971, average = 0.00161917022
+room_CEILING
+    y+ : min = 0.701397889, max = 6.56351949, average = 3.51551551
+    y : min = 0.000647142072, max = 0.00249999973, average = 0.00231379284
+room_BACK
+    y+ : min = 0.304629201, max = 51.0513392, average = 4.29273464
+    y : min = 0.000872666798, max = 0.00549005797, average = 0.00123342378
+room_SIDE1
+    y+ : min = 0.47483602, max = 6.78626089, average = 3.77541988
+    y : min = 0.000544684643, max = 0.0025, average = 0.00234602486
+manikin
+    y+ : min = 0.0473646346, max = 7.87562844, average = 1.04345667
+    y : min = 4.97449872e-05, max = 0.00255854003, average = 0.000292020944
+
+forceCoeffs forceCoeffs1 output:
+    Cm    = -4521.53857
+    Cd    = -96.7909222
+    Cl    = -8706.07611
+    Cl(f) = -8874.57663
+    Cl(r) = 168.500517
+
+Time = 6003
+
+DILUPBiCG:  Solving for Ux, Initial residual = 0.00504059668, Final residual = 6.36886747e-05, No Iterations 1
+DILUPBiCG:  Solving for Uy, Initial residual = 0.00483645618, Final residual = 6.97713496e-05, No Iterations 1
+DILUPBiCG:  Solving for Uz, Initial residual = 0.00547148407, Final residual = 7.22753893e-05, No Iterations 1
+DILUPBiCG:  Solving for h, Initial residual = 0.00127809349, Final residual = 1.68286043e-05, No Iterations 1
+GAMG:  Solving for p_rgh, Initial residual = 0.620287036, Final residual = 0.00282643316, No Iterations 3
+time step continuity errors : sum local = 0.000895805586, global = 8.08489273e-05, cumulative = -0.000237359225
+rho max/min : 1.23922714 1.15450646
+smoothSolver:  Solving for epsilon, Initial residual = 0.274464268, Final residual = 0.0232280163, No Iterations 4
+smoothSolver:  Solving for k, Initial residual = 0.29480874, Final residual = 0.0223165462, No Iterations 4
+ExecutionTime = 53.81 s  ClockTime = 55 s
+
+wallHeatFlux wallHeatFlux output:
+
+Wall heat fluxes [W]
+room_SIDE2
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.93326, average = 293.575161
+room_FLOOR
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823583, max = 306.357971, average = 293.470404
+room_CEILING
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 293.932358, max = 293.932535, average = 293.932416
+room_BACK
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.813148, max = 293.932565, average = 293.60292
+room_SIDE1
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823843, max = 293.93326, average = 293.572475
+manikin
+    convective: 220.571227
+    radiative:  -0
+    total:      220.571227
+    Temperature : min = 307.15, max = 307.15, average = 307.15
+
+yPlusRAS yplusRAS output:
+    patch room_SIDE2 y+ : min = 0.51293927, max = 6.98130967, average = 3.92048939
+    patch room_FLOOR y+ : min = 0.186319235, max = 7.39900401, average = 3.01108102
+    patch room_CEILING y+ : min = 0.412197735, max = 6.57354088, average = 3.67677595
+    patch room_BACK y+ : min = 0.424101543, max = 51.6907855, average = 3.71525159
+    patch room_SIDE1 y+ : min = 0.375660837, max = 6.86713489, average = 3.9420961
+    patch manikin y+ : min = 0.0568556982, max = 7.9720319, average = 1.07859103
+
+yPlusRASLowRe yplusRASLowRe output:
+room_SIDE2
+    y+ : min = 0.51293927, max = 6.98130967, average = 3.92048939
+    y : min = 0.000544684214, max = 0.00250000001, average = 0.00234603179
+room_FLOOR
+    y+ : min = 0.186319235, max = 7.39900401, average = 3.01108102
+    y : min = 0.000139430812, max = 0.00249999971, average = 0.00161917022
+room_CEILING
+    y+ : min = 0.412197735, max = 6.57354088, average = 3.67677595
+    y : min = 0.000647142072, max = 0.00249999973, average = 0.00231379284
+room_BACK
+    y+ : min = 0.424101543, max = 51.6907855, average = 3.71525159
+    y : min = 0.000872666798, max = 0.00549005797, average = 0.00123342378
+room_SIDE1
+    y+ : min = 0.375660837, max = 6.86713489, average = 3.9420961
+    y : min = 0.000544684643, max = 0.0025, average = 0.00234602486
+manikin
+    y+ : min = 0.0568556982, max = 7.9720319, average = 1.07859103
+    y : min = 4.97449872e-05, max = 0.00255854003, average = 0.000292020944
+
+forceCoeffs forceCoeffs1 output:
+    Cm    = -4516.31885
+    Cd    = -94.0223248
+    Cl    = -8695.92873
+    Cl(f) = -8864.28321
+    Cl(r) = 168.354487
+
+Time = 6004
+
+DILUPBiCG:  Solving for Ux, Initial residual = 0.00462836165, Final residual = 6.17675057e-05, No Iterations 1
+DILUPBiCG:  Solving for Uy, Initial residual = 0.0035940631, Final residual = 5.25122284e-05, No Iterations 1
+DILUPBiCG:  Solving for Uz, Initial residual = 0.00518823124, Final residual = 7.03816494e-05, No Iterations 1
+DILUPBiCG:  Solving for h, Initial residual = 0.00105729225, Final residual = 1.41775401e-05, No Iterations 1
+GAMG:  Solving for p_rgh, Initial residual = 0.368969802, Final residual = 0.00200005204, No Iterations 4
+time step continuity errors : sum local = 0.000514024228, global = 2.38530163e-05, cumulative = -0.000213506209
+rho max/min : 1.23156569 1.15314108
+smoothSolver:  Solving for epsilon, Initial residual = 0.20074396, Final residual = 0.0182967919, No Iterations 4
+smoothSolver:  Solving for k, Initial residual = 0.185204347, Final residual = 0.0142247837, No Iterations 4
+ExecutionTime = 67.57 s  ClockTime = 68 s
+
+wallHeatFlux wallHeatFlux output:
+
+Wall heat fluxes [W]
+room_SIDE2
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933261, average = 293.574971
+room_FLOOR
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823606, max = 306.355639, average = 293.472541
+room_CEILING
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 293.93236, max = 293.932535, average = 293.932415
+room_BACK
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.812202, max = 293.932564, average = 293.602727
+room_SIDE1
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823843, max = 293.933261, average = 293.572445
+manikin
+    convective: 219.546881
+    radiative:  -0
+    total:      219.546881
+    Temperature : min = 307.15, max = 307.15, average = 307.15
+
+yPlusRAS yplusRAS output:
+    patch room_SIDE2 y+ : min = 0.59466524, max = 7.14126825, average = 4.02372644
+    patch room_FLOOR y+ : min = 0.162029612, max = 7.52619128, average = 3.09676965
+    patch room_CEILING y+ : min = 0.496578469, max = 6.56944734, average = 3.79571785
+    patch room_BACK y+ : min = 0.341709661, max = 51.4308472, average = 3.62757917
+    patch room_SIDE1 y+ : min = 0.507205517, max = 7.03960572, average = 4.04987159
+    patch manikin y+ : min = 0.0393173251, max = 8.01068287, average = 1.10332602
+
+yPlusRASLowRe yplusRASLowRe output:
+room_SIDE2
+    y+ : min = 0.59466524, max = 7.14126825, average = 4.02372644
+    y : min = 0.000544684214, max = 0.00250000001, average = 0.00234603179
+room_FLOOR
+    y+ : min = 0.162029612, max = 7.52619128, average = 3.09676965
+    y : min = 0.000139430812, max = 0.00249999971, average = 0.00161917022
+room_CEILING
+    y+ : min = 0.496578469, max = 6.56944734, average = 3.79571785
+    y : min = 0.000647142072, max = 0.00249999973, average = 0.00231379284
+room_BACK
+    y+ : min = 0.341709661, max = 51.4308472, average = 3.62757917
+    y : min = 0.000872666798, max = 0.00549005797, average = 0.00123342378
+room_SIDE1
+    y+ : min = 0.507205517, max = 7.03960572, average = 4.04987159
+    y : min = 0.000544684643, max = 0.0025, average = 0.00234602486
+manikin
+    y+ : min = 0.0393173251, max = 8.01068287, average = 1.10332602
+    y : min = 4.97449872e-05, max = 0.00255854003, average = 0.000292020944
+
+forceCoeffs forceCoeffs1 output:
+    Cm    = -4499.81415
+    Cd    = -91.5591796
+    Cl    = -8664.15882
+    Cl(f) = -8831.89356
+    Cl(r) = 167.734746
+
+Time = 6005
+
+DILUPBiCG:  Solving for Ux, Initial residual = 0.00432403097, Final residual = 5.49293438e-05, No Iterations 1
+DILUPBiCG:  Solving for Uy, Initial residual = 0.00344367651, Final residual = 4.53297619e-05, No Iterations 1
+DILUPBiCG:  Solving for Uz, Initial residual = 0.00485326377, Final residual = 6.25608866e-05, No Iterations 1
+DILUPBiCG:  Solving for h, Initial residual = 0.000928746895, Final residual = 1.24954987e-05, No Iterations 1
+GAMG:  Solving for p_rgh, Initial residual = 0.228091071, Final residual = 0.00208078421, No Iterations 3
+time step continuity errors : sum local = 0.000488160511, global = 4.18780784e-05, cumulative = -0.000171628131
+rho max/min : 1.22064091 1.14891421
+smoothSolver:  Solving for epsilon, Initial residual = 0.139603816, Final residual = 0.0122219645, No Iterations 4
+smoothSolver:  Solving for k, Initial residual = 0.133459147, Final residual = 0.0103437866, No Iterations 4
+ExecutionTime = 80.03 s  ClockTime = 81 s
+
+wallHeatFlux wallHeatFlux output:
+
+Wall heat fluxes [W]
+room_SIDE2
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933262, average = 293.574784
+room_FLOOR
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.82364, max = 306.346983, average = 293.475099
+room_CEILING
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 293.932361, max = 293.932535, average = 293.932415
+room_BACK
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.811687, max = 293.932564, average = 293.602566
+room_SIDE1
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933262, average = 293.572404
+manikin
+    convective: 218.277677
+    radiative:  -0
+    total:      218.277677
+    Temperature : min = 307.15, max = 307.15, average = 307.15
+
+yPlusRAS yplusRAS output:
+    patch room_SIDE2 y+ : min = 0.343876849, max = 7.29061171, average = 4.09773707
+    patch room_FLOOR y+ : min = 0.145097127, max = 7.61759793, average = 3.15393327
+    patch room_CEILING y+ : min = 0.340404926, max = 6.59709316, average = 3.87597649
+    patch room_BACK y+ : min = 0.384413155, max = 50.9722165, average = 4.37622212
+    patch room_SIDE1 y+ : min = 0.604036926, max = 7.1981774, average = 4.12526863
+    patch manikin y+ : min = 0.0435157792, max = 7.98522381, average = 1.12224891
+
+yPlusRASLowRe yplusRASLowRe output:
+room_SIDE2
+    y+ : min = 0.343876849, max = 7.29061171, average = 4.09773707
+    y : min = 0.000544684214, max = 0.00250000001, average = 0.00234603179
+room_FLOOR
+    y+ : min = 0.145097127, max = 7.61759793, average = 3.15393327
+    y : min = 0.000139430812, max = 0.00249999971, average = 0.00161917022
+room_CEILING
+    y+ : min = 0.340404926, max = 6.59709316, average = 3.87597649
+    y : min = 0.000647142072, max = 0.00249999973, average = 0.00231379284
+room_BACK
+    y+ : min = 0.384413155, max = 50.9722165, average = 4.37622212
+    y : min = 0.000872666798, max = 0.00549005797, average = 0.00123342378
+room_SIDE1
+    y+ : min = 0.604036926, max = 7.1981774, average = 4.12526863
+    y : min = 0.000544684643, max = 0.0025, average = 0.00234602486
+manikin
+    y+ : min = 0.0435157792, max = 7.98522381, average = 1.12224891
+    y : min = 4.97449872e-05, max = 0.00255854003, average = 0.000292020944
+
+forceCoeffs forceCoeffs1 output:
+    Cm    = -4496.31009
+    Cd    = -91.5086709
+    Cl    = -8657.45237
+    Cl(f) = -8825.03628
+    Cl(r) = 167.583906
+
+Time = 6006
+
+DILUPBiCG:  Solving for Ux, Initial residual = 0.0035629581, Final residual = 4.44246219e-05, No Iterations 1
+DILUPBiCG:  Solving for Uy, Initial residual = 0.00386674795, Final residual = 4.45466163e-05, No Iterations 1
+DILUPBiCG:  Solving for Uz, Initial residual = 0.00404561508, Final residual = 5.17264124e-05, No Iterations 1
+DILUPBiCG:  Solving for h, Initial residual = 0.000836994184, Final residual = 1.1267664e-05, No Iterations 1
+GAMG:  Solving for p_rgh, Initial residual = 0.18706178, Final residual = 0.00101599313, No Iterations 4
+time step continuity errors : sum local = 0.000234370105, global = -2.07933597e-05, cumulative = -0.00019242149
+rho max/min : 1.21631401 1.148018
+smoothSolver:  Solving for epsilon, Initial residual = 0.119321284, Final residual = 0.00950034997, No Iterations 4
+smoothSolver:  Solving for k, Initial residual = 0.103557725, Final residual = 0.00807527027, No Iterations 4
+ExecutionTime = 92.36 s  ClockTime = 93 s
+
+wallHeatFlux wallHeatFlux output:
+
+Wall heat fluxes [W]
+room_SIDE2
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.574597
+room_FLOOR
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823667, max = 306.339778, average = 293.478046
+room_CEILING
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 293.932361, max = 293.932535, average = 293.932415
+room_BACK
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.810447, max = 293.932564, average = 293.602431
+room_SIDE1
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.572339
+manikin
+    convective: 217.069787
+    radiative:  -0
+    total:      217.069787
+    Temperature : min = 307.15, max = 307.15, average = 307.15
+
+yPlusRAS yplusRAS output:
+    patch room_SIDE2 y+ : min = 0.595310485, max = 7.44078511, average = 4.16179851
+    patch room_FLOOR y+ : min = 0.0982229408, max = 7.67791136, average = 3.19196197
+    patch room_CEILING y+ : min = 0.439793096, max = 6.78179213, average = 3.93278376
+    patch room_BACK y+ : min = 0.286119736, max = 51.6795147, average = 4.79698412
+    patch room_SIDE1 y+ : min = 0.71456731, max = 7.35697069, average = 4.18751873
+    patch manikin y+ : min = 0.0523073088, max = 7.93308928, average = 1.13501102
+
+yPlusRASLowRe yplusRASLowRe output:
+room_SIDE2
+    y+ : min = 0.595310485, max = 7.44078511, average = 4.16179851
+    y : min = 0.000544684214, max = 0.00250000001, average = 0.00234603179
+room_FLOOR
+    y+ : min = 0.0982229408, max = 7.67791136, average = 3.19196197
+    y : min = 0.000139430812, max = 0.00249999971, average = 0.00161917022
+room_CEILING
+    y+ : min = 0.439793096, max = 6.78179213, average = 3.93278376
+    y : min = 0.000647142072, max = 0.00249999973, average = 0.00231379284
+room_BACK
+    y+ : min = 0.286119736, max = 51.6795147, average = 4.79698412
+    y : min = 0.000872666798, max = 0.00549005797, average = 0.00123342378
+room_SIDE1
+    y+ : min = 0.71456731, max = 7.35697069, average = 4.18751873
+    y : min = 0.000544684643, max = 0.0025, average = 0.00234602486
+manikin
+    y+ : min = 0.0523073088, max = 7.93308928, average = 1.13501102
+    y : min = 4.97449872e-05, max = 0.00255854003, average = 0.000292020944
+
+forceCoeffs forceCoeffs1 output:
+    Cm    = -4498.28775
+    Cd    = -92.4274954
+    Cl    = -8661.31495
+    Cl(f) = -8828.94522
+    Cl(r) = 167.630277
+
+Time = 6007
+
+DILUPBiCG:  Solving for Ux, Initial residual = 0.00421843754, Final residual = 5.40523767e-05, No Iterations 1
+DILUPBiCG:  Solving for Uy, Initial residual = 0.00330579444, Final residual = 3.67743618e-05, No Iterations 1
+DILUPBiCG:  Solving for Uz, Initial residual = 0.0048392034, Final residual = 6.15079861e-05, No Iterations 1
+DILUPBiCG:  Solving for h, Initial residual = 0.000763565361, Final residual = 1.02874136e-05, No Iterations 1
+GAMG:  Solving for p_rgh, Initial residual = 0.130853868, Final residual = 0.000688439669, No Iterations 4
+time step continuity errors : sum local = 0.000159808632, global = 2.65576847e-05, cumulative = -0.000165863806
+rho max/min : 1.21716015 1.14853493
+smoothSolver:  Solving for epsilon, Initial residual = 0.113277751, Final residual = 0.00867205905, No Iterations 4
+smoothSolver:  Solving for k, Initial residual = 0.0845683246, Final residual = 0.00661255226, No Iterations 4
+ExecutionTime = 104.62 s  ClockTime = 105 s
+
+wallHeatFlux wallHeatFlux output:
+
+Wall heat fluxes [W]
+room_SIDE2
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.574411
+room_FLOOR
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823689, max = 306.33696, average = 293.481364
+room_CEILING
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 293.932361, max = 293.932535, average = 293.932415
+room_BACK
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.80658, max = 293.932563, average = 293.602311
+room_SIDE1
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.572266
+manikin
+    convective: 216.358998
+    radiative:  -0
+    total:      216.358998
+    Temperature : min = 307.15, max = 307.15, average = 307.15
+
+yPlusRAS yplusRAS output:
+    patch room_SIDE2 y+ : min = 0.670263162, max = 7.5751372, average = 4.22333579
+    patch room_FLOOR y+ : min = 0.0709712886, max = 7.74443915, average = 3.22265635
+    patch room_CEILING y+ : min = 0.496719464, max = 7.09013817, average = 3.98547293
+    patch room_BACK y+ : min = 0.550129887, max = 52.2200727, average = 5.19408341
+    patch room_SIDE1 y+ : min = 0.658595219, max = 7.50453047, average = 4.24563748
+    patch manikin y+ : min = 0.0265668352, max = 7.91247887, average = 1.14461006
+
+yPlusRASLowRe yplusRASLowRe output:
+room_SIDE2
+    y+ : min = 0.670263162, max = 7.5751372, average = 4.22333579
+    y : min = 0.000544684214, max = 0.00250000001, average = 0.00234603179
+room_FLOOR
+    y+ : min = 0.0709712886, max = 7.74443915, average = 3.22265635
+    y : min = 0.000139430812, max = 0.00249999971, average = 0.00161917022
+room_CEILING
+    y+ : min = 0.496719464, max = 7.09013817, average = 3.98547293
+    y : min = 0.000647142072, max = 0.00249999973, average = 0.00231379284
+room_BACK
+    y+ : min = 0.550129887, max = 52.2200727, average = 5.19408341
+    y : min = 0.000872666798, max = 0.00549005797, average = 0.00123342378
+room_SIDE1
+    y+ : min = 0.658595219, max = 7.50453047, average = 4.24563748
+    y : min = 0.000544684643, max = 0.0025, average = 0.00234602486
+manikin
+    y+ : min = 0.0265668352, max = 7.91247887, average = 1.14461006
+    y : min = 4.97449872e-05, max = 0.00255854003, average = 0.000292020944
+
+forceCoeffs forceCoeffs1 output:
+    Cm    = -4496.03421
+    Cd    = -92.8657069
+    Cl    = -8656.97229
+    Cl(f) = -8824.52035
+    Cl(r) = 167.548062
+
+Time = 6008
+
+DILUPBiCG:  Solving for Ux, Initial residual = 0.00513948988, Final residual = 6.087493e-05, No Iterations 1
+DILUPBiCG:  Solving for Uy, Initial residual = 0.00280521738, Final residual = 3.3892281e-05, No Iterations 1
+DILUPBiCG:  Solving for Uz, Initial residual = 0.00580356956, Final residual = 6.84953533e-05, No Iterations 1
+DILUPBiCG:  Solving for h, Initial residual = 0.000699157789, Final residual = 9.43065204e-06, No Iterations 1
+GAMG:  Solving for p_rgh, Initial residual = 0.097332835, Final residual = 0.000800030992, No Iterations 5
+time step continuity errors : sum local = 0.000182600941, global = 1.77514078e-05, cumulative = -0.000148112398
+rho max/min : 1.23113341 1.14796988
+smoothSolver:  Solving for epsilon, Initial residual = 0.103809154, Final residual = 0.00812702243, No Iterations 4
+smoothSolver:  Solving for k, Initial residual = 0.0716971371, Final residual = 0.00562991934, No Iterations 4
+ExecutionTime = 117.8 s  ClockTime = 119 s
+
+wallHeatFlux wallHeatFlux output:
+
+Wall heat fluxes [W]
+room_SIDE2
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.574225
+room_FLOOR
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.82372, max = 306.33496, average = 293.484791
+room_CEILING
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 293.932361, max = 293.932535, average = 293.932415
+room_BACK
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.80461, max = 293.932563, average = 293.602211
+room_SIDE1
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.572189
+manikin
+    convective: 216.294052
+    radiative:  -0
+    total:      216.294052
+    Temperature : min = 307.15, max = 307.15, average = 307.15
+
+yPlusRAS yplusRAS output:
+    patch room_SIDE2 y+ : min = 0.597758361, max = 7.72836231, average = 4.27925115
+    patch room_FLOOR y+ : min = 0.101508484, max = 7.91888691, average = 3.24799083
+    patch room_CEILING y+ : min = 0.362920236, max = 7.45233853, average = 4.03311322
+    patch room_BACK y+ : min = 0.486897833, max = 51.6136998, average = 5.66161439
+    patch room_SIDE1 y+ : min = 0.397689921, max = 7.65286242, average = 4.29744889
+    patch manikin y+ : min = 0.0422053251, max = 7.90909478, average = 1.15275585
+
+yPlusRASLowRe yplusRASLowRe output:
+room_SIDE2
+    y+ : min = 0.597758361, max = 7.72836231, average = 4.27925115
+    y : min = 0.000544684214, max = 0.00250000001, average = 0.00234603179
+room_FLOOR
+    y+ : min = 0.101508484, max = 7.91888691, average = 3.24799083
+    y : min = 0.000139430812, max = 0.00249999971, average = 0.00161917022
+room_CEILING
+    y+ : min = 0.362920236, max = 7.45233853, average = 4.03311322
+    y : min = 0.000647142072, max = 0.00249999973, average = 0.00231379284
+room_BACK
+    y+ : min = 0.486897833, max = 51.6136998, average = 5.66161439
+    y : min = 0.000872666798, max = 0.00549005797, average = 0.00123342378
+room_SIDE1
+    y+ : min = 0.397689921, max = 7.65286242, average = 4.29744889
+    y : min = 0.000544684643, max = 0.0025, average = 0.00234602486
+manikin
+    y+ : min = 0.0422053251, max = 7.90909478, average = 1.15275585
+    y : min = 4.97449872e-05, max = 0.00255854003, average = 0.000292020944
+
+forceCoeffs forceCoeffs1 output:
+    Cm    = -4491.42468
+    Cd    = -92.8389004
+    Cl    = -8648.08062
+    Cl(f) = -8815.46499
+    Cl(r) = 167.38437
+
+Time = 6009
+
+DILUPBiCG:  Solving for Ux, Initial residual = 0.00363852165, Final residual = 4.07163733e-05, No Iterations 1
+DILUPBiCG:  Solving for Uy, Initial residual = 0.00447269327, Final residual = 4.71193697e-05, No Iterations 1
+DILUPBiCG:  Solving for Uz, Initial residual = 0.00391034279, Final residual = 4.41078045e-05, No Iterations 1
+DILUPBiCG:  Solving for h, Initial residual = 0.000642266311, Final residual = 8.67765819e-06, No Iterations 1
+GAMG:  Solving for p_rgh, Initial residual = 0.0885009864, Final residual = 0.000535821985, No Iterations 6
+time step continuity errors : sum local = 0.000117627963, global = -6.64834982e-06, cumulative = -0.000154760748
+rho max/min : 1.22617015 1.14679568
+smoothSolver:  Solving for epsilon, Initial residual = 0.096837603, Final residual = 0.00753579525, No Iterations 4
+smoothSolver:  Solving for k, Initial residual = 0.0616841239, Final residual = 0.00488773602, No Iterations 4
+ExecutionTime = 130.83 s  ClockTime = 132 s
+
+wallHeatFlux wallHeatFlux output:
+
+Wall heat fluxes [W]
+room_SIDE2
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.574045
+room_FLOOR
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.82376, max = 306.331251, average = 293.488292
+room_CEILING
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 293.932361, max = 293.932534, average = 293.932415
+room_BACK
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.805756, max = 293.932586, average = 293.602137
+room_SIDE1
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.572112
+manikin
+    convective: 216.875434
+    radiative:  -0
+    total:      216.875434
+    Temperature : min = 307.15, max = 307.15, average = 307.15
+
+yPlusRAS yplusRAS output:
+    patch room_SIDE2 y+ : min = 0.762288508, max = 7.88379691, average = 4.31870454
+    patch room_FLOOR y+ : min = 0.11806573, max = 8.08279305, average = 3.26105234
+    patch room_CEILING y+ : min = 0.452345222, max = 7.68887695, average = 4.06793889
+    patch room_BACK y+ : min = 0.525800302, max = 51.8116572, average = 6.04231609
+    patch room_SIDE1 y+ : min = 0.639507964, max = 7.80435186, average = 4.33284805
+    patch manikin y+ : min = 0.0393602365, max = 7.9134892, average = 1.16009734
+
+yPlusRASLowRe yplusRASLowRe output:
+room_SIDE2
+    y+ : min = 0.762288508, max = 7.88379691, average = 4.31870454
+    y : min = 0.000544684214, max = 0.00250000001, average = 0.00234603179
+room_FLOOR
+    y+ : min = 0.11806573, max = 8.08279305, average = 3.26105234
+    y : min = 0.000139430812, max = 0.00249999971, average = 0.00161917022
+room_CEILING
+    y+ : min = 0.452345222, max = 7.68887695, average = 4.06793889
+    y : min = 0.000647142072, max = 0.00249999973, average = 0.00231379284
+room_BACK
+    y+ : min = 0.525800302, max = 51.8116572, average = 6.04231609
+    y : min = 0.000872666798, max = 0.00549005797, average = 0.00123342378
+room_SIDE1
+    y+ : min = 0.639507964, max = 7.80435186, average = 4.33284805
+    y : min = 0.000544684643, max = 0.0025, average = 0.00234602486
+manikin
+    y+ : min = 0.0393602365, max = 7.9134892, average = 1.16009734
+    y : min = 4.97449872e-05, max = 0.00255854003, average = 0.000292020944
+
+forceCoeffs forceCoeffs1 output:
+    Cm    = -4496.85334
+    Cd    = -93.0888367
+    Cl    = -8658.52997
+    Cl(f) = -8826.11832
+    Cl(r) = 167.588353
+
+Time = 6010
+
+DILUPBiCG:  Solving for Ux, Initial residual = 0.00346456012, Final residual = 4.13668471e-05, No Iterations 1
+DILUPBiCG:  Solving for Uy, Initial residual = 0.00641229085, Final residual = 6.73717558e-05, No Iterations 1
+DILUPBiCG:  Solving for Uz, Initial residual = 0.00401968331, Final residual = 4.75369485e-05, No Iterations 1
+DILUPBiCG:  Solving for h, Initial residual = 0.000595420206, Final residual = 8.06481307e-06, No Iterations 1
+GAMG:  Solving for p_rgh, Initial residual = 0.0817004598, Final residual = 0.00047088954, No Iterations 7
+time step continuity errors : sum local = 0.000111282244, global = -4.01215942e-06, cumulative = -0.000158772907
+rho max/min : 1.21935051 1.14342328
+smoothSolver:  Solving for epsilon, Initial residual = 0.0912037102, Final residual = 0.00693928451, No Iterations 4
+smoothSolver:  Solving for k, Initial residual = 0.053303968, Final residual = 0.00423024894, No Iterations 4
+ExecutionTime = 144.31 s  ClockTime = 145 s
+
+wallHeatFlux wallHeatFlux output:
+
+Wall heat fluxes [W]
+room_SIDE2
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.573867
+room_FLOOR
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.82381, max = 306.326536, average = 293.491819
+room_CEILING
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 293.932361, max = 293.932534, average = 293.932415
+room_BACK
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.805873, max = 293.932621, average = 293.602072
+room_SIDE1
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.572029
+manikin
+    convective: 218.012178
+    radiative:  -0
+    total:      218.012178
+    Temperature : min = 307.15, max = 307.15, average = 307.15
+
+yPlusRAS yplusRAS output:
+    patch room_SIDE2 y+ : min = 0.801356828, max = 8.05281129, average = 4.34624437
+    patch room_FLOOR y+ : min = 0.114782928, max = 8.26749729, average = 3.26506413
+    patch room_CEILING y+ : min = 0.52766294, max = 7.77747581, average = 4.09749343
+    patch room_BACK y+ : min = 0.172688465, max = 54.2444772, average = 6.30245806
+    patch room_SIDE1 y+ : min = 0.690309694, max = 7.99117298, average = 4.35672358
+    patch manikin y+ : min = 0.0391131659, max = 7.92629795, average = 1.16779472
+
+yPlusRASLowRe yplusRASLowRe output:
+room_SIDE2
+    y+ : min = 0.801356828, max = 8.05281129, average = 4.34624437
+    y : min = 0.000544684214, max = 0.00250000001, average = 0.00234603179
+room_FLOOR
+    y+ : min = 0.114782928, max = 8.26749729, average = 3.26506413
+    y : min = 0.000139430812, max = 0.00249999971, average = 0.00161917022
+room_CEILING
+    y+ : min = 0.52766294, max = 7.77747581, average = 4.09749343
+    y : min = 0.000647142072, max = 0.00249999973, average = 0.00231379284
+room_BACK
+    y+ : min = 0.172688465, max = 54.2444772, average = 6.30245806
+    y : min = 0.000872666798, max = 0.00549005797, average = 0.00123342378
+room_SIDE1
+    y+ : min = 0.690309694, max = 7.99117298, average = 4.35672358
+    y : min = 0.000544684643, max = 0.0025, average = 0.00234602486
+manikin
+    y+ : min = 0.0391131659, max = 7.92629795, average = 1.16779472
+    y : min = 4.97449872e-05, max = 0.00255854003, average = 0.000292020944
+
+forceCoeffs forceCoeffs1 output:
+    Cm    = -4506.07072
+    Cd    = -93.5803907
+    Cl    = -8676.28065
+    Cl(f) = -8844.21104
+    Cl(r) = 167.930395
+
+Time = 6011
+
+DILUPBiCG:  Solving for Ux, Initial residual = 0.00695005456, Final residual = 8.55468023e-05, No Iterations 1
+DILUPBiCG:  Solving for Uy, Initial residual = 0.00652932968, Final residual = 6.91717088e-05, No Iterations 1
+DILUPBiCG:  Solving for Uz, Initial residual = 0.00801975864, Final residual = 9.88491681e-05, No Iterations 1
+DILUPBiCG:  Solving for h, Initial residual = 0.000557252266, Final residual = 7.55297239e-06, No Iterations 1
+GAMG:  Solving for p_rgh, Initial residual = 0.0878247016, Final residual = 0.000864954963, No Iterations 6
+time step continuity errors : sum local = 0.000233162379, global = 1.3552765e-05, cumulative = -0.000145220142
+rho max/min : 1.24505949 1.14947214
+smoothSolver:  Solving for epsilon, Initial residual = 0.0851454013, Final residual = 0.00637721296, No Iterations 4
+smoothSolver:  Solving for k, Initial residual = 0.0476604721, Final residual = 0.00373644923, No Iterations 4
+ExecutionTime = 157.34 s  ClockTime = 158 s
+
+wallHeatFlux wallHeatFlux output:
+
+Wall heat fluxes [W]
+room_SIDE2
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.573682
+room_FLOOR
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823831, max = 306.34187, average = 293.495364
+room_CEILING
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 293.932361, max = 293.932534, average = 293.932415
+room_BACK
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.802849, max = 293.932649, average = 293.602002
+room_SIDE1
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.571933
+manikin
+    convective: 219.609299
+    radiative:  -0
+    total:      219.609299
+    Temperature : min = 307.15, max = 307.15, average = 307.15
+
+yPlusRAS yplusRAS output:
+    patch room_SIDE2 y+ : min = 0.628181755, max = 8.29858164, average = 4.37942182
+    patch room_FLOOR y+ : min = 0.113320574, max = 8.4771249, average = 3.27764608
+    patch room_CEILING y+ : min = 0.492510747, max = 8.0111229, average = 4.12635015
+    patch room_BACK y+ : min = 0.406456503, max = 55.2555773, average = 6.63847082
+    patch room_SIDE1 y+ : min = 0.75471446, max = 8.19715514, average = 4.38612658
+    patch manikin y+ : min = 0.0547220798, max = 7.9389663, average = 1.17540845
+
+yPlusRASLowRe yplusRASLowRe output:
+room_SIDE2
+    y+ : min = 0.628181755, max = 8.29858164, average = 4.37942182
+    y : min = 0.000544684214, max = 0.00250000001, average = 0.00234603179
+room_FLOOR
+    y+ : min = 0.113320574, max = 8.4771249, average = 3.27764608
+    y : min = 0.000139430812, max = 0.00249999971, average = 0.00161917022
+room_CEILING
+    y+ : min = 0.492510747, max = 8.0111229, average = 4.12635015
+    y : min = 0.000647142072, max = 0.00249999973, average = 0.00231379284
+room_BACK
+    y+ : min = 0.406456503, max = 55.2555773, average = 6.63847082
+    y : min = 0.000872666798, max = 0.00549005797, average = 0.00123342378
+room_SIDE1
+    y+ : min = 0.75471446, max = 8.19715514, average = 4.38612658
+    y : min = 0.000544684643, max = 0.0025, average = 0.00234602486
+manikin
+    y+ : min = 0.0547220798, max = 7.9389663, average = 1.17540845
+    y : min = 4.97449872e-05, max = 0.00255854003, average = 0.000292020944
+
+forceCoeffs forceCoeffs1 output:
+    Cm    = -4496.4087
+    Cd    = -93.1957101
+    Cl    = -8657.68673
+    Cl(f) = -8825.25207
+    Cl(r) = 167.565341
+
+Time = 6012
+
+DILUPBiCG:  Solving for Ux, Initial residual = 0.00979962065, Final residual = 0.000111963595, No Iterations 1
+DILUPBiCG:  Solving for Uy, Initial residual = 0.00807929824, Final residual = 9.27990525e-05, No Iterations 1
+DILUPBiCG:  Solving for Uz, Initial residual = 0.0111812932, Final residual = 0.000126386639, No Iterations 1
+DILUPBiCG:  Solving for h, Initial residual = 0.000520203898, Final residual = 7.04883719e-06, No Iterations 1
+GAMG:  Solving for p_rgh, Initial residual = 0.108424979, Final residual = 0.000840379748, No Iterations 7
+time step continuity errors : sum local = 0.000207879615, global = 8.53389267e-06, cumulative = -0.000136686249
+rho max/min : 1.33431222 1.1480879
+smoothSolver:  Solving for epsilon, Initial residual = 0.0756659816, Final residual = 0.00569945487, No Iterations 4
+smoothSolver:  Solving for k, Initial residual = 0.0444332324, Final residual = 0.00349811237, No Iterations 4
+ExecutionTime = 172.63 s  ClockTime = 174 s
+
+wallHeatFlux wallHeatFlux output:
+
+Wall heat fluxes [W]
+room_SIDE2
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.573507
+room_FLOOR
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823842, max = 306.355651, average = 293.498948
+room_CEILING
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 293.932361, max = 293.932534, average = 293.932415
+room_BACK
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.802904, max = 293.932684, average = 293.601964
+room_SIDE1
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.57184
+manikin
+    convective: 221.591238
+    radiative:  -0
+    total:      221.591238
+    Temperature : min = 307.15, max = 307.15, average = 307.15
+
+yPlusRAS yplusRAS output:
+    patch room_SIDE2 y+ : min = 0.383398424, max = 8.5484708, average = 4.41173196
+    patch room_FLOOR y+ : min = 0.109100881, max = 8.69029708, average = 3.29822494
+    patch room_CEILING y+ : min = 0.632946782, max = 8.43275587, average = 4.14674543
+    patch room_BACK y+ : min = 0.27323374, max = 52.4291349, average = 7.07883197
+    patch room_SIDE1 y+ : min = 0.302428939, max = 8.42508184, average = 4.41454458
+    patch manikin y+ : min = 0.0480853611, max = 7.93336444, average = 1.18022972
+
+yPlusRASLowRe yplusRASLowRe output:
+room_SIDE2
+    y+ : min = 0.383398424, max = 8.5484708, average = 4.41173196
+    y : min = 0.000544684214, max = 0.00250000001, average = 0.00234603179
+room_FLOOR
+    y+ : min = 0.109100881, max = 8.69029708, average = 3.29822494
+    y : min = 0.000139430812, max = 0.00249999971, average = 0.00161917022
+room_CEILING
+    y+ : min = 0.632946782, max = 8.43275587, average = 4.14674543
+    y : min = 0.000647142072, max = 0.00249999973, average = 0.00231379284
+room_BACK
+    y+ : min = 0.27323374, max = 52.4291349, average = 7.07883197
+    y : min = 0.000872666798, max = 0.00549005797, average = 0.00123342378
+room_SIDE1
+    y+ : min = 0.302428939, max = 8.42508184, average = 4.41454458
+    y : min = 0.000544684643, max = 0.0025, average = 0.00234602486
+manikin
+    y+ : min = 0.0480853611, max = 7.93336444, average = 1.18022972
+    y : min = 4.97449872e-05, max = 0.00255854003, average = 0.000292020944
+
+forceCoeffs forceCoeffs1 output:
+    Cm    = -4480.57595
+    Cd    = -92.528668
+    Cl    = -8627.21316
+    Cl(f) = -8794.18253
+    Cl(r) = 166.96937
+
+Time = 6013
+
+DILUPBiCG:  Solving for Ux, Initial residual = 0.0103516526, Final residual = 0.000115570464, No Iterations 1
+DILUPBiCG:  Solving for Uy, Initial residual = 0.0124427209, Final residual = 0.000127827562, No Iterations 1
+DILUPBiCG:  Solving for Uz, Initial residual = 0.0118188242, Final residual = 0.000134720923, No Iterations 1
+DILUPBiCG:  Solving for h, Initial residual = 0.000483735927, Final residual = 6.61291127e-06, No Iterations 1
+GAMG:  Solving for p_rgh, Initial residual = 0.133634279, Final residual = 0.000836775964, No Iterations 7
+time step continuity errors : sum local = 0.000232915136, global = -8.77232256e-06, cumulative = -0.000145458572
+rho max/min : 1.30729755 1.1135342
+smoothSolver:  Solving for epsilon, Initial residual = 0.0677719035, Final residual = 0.00505514533, No Iterations 4
+smoothSolver:  Solving for k, Initial residual = 0.0398502624, Final residual = 0.00323804406, No Iterations 4
+ExecutionTime = 187.1 s  ClockTime = 188 s
+
+wallHeatFlux wallHeatFlux output:
+
+Wall heat fluxes [W]
+room_SIDE2
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.573357
+room_FLOOR
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 306.366192, average = 293.502565
+room_CEILING
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 293.932361, max = 293.932535, average = 293.932415
+room_BACK
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.808055, max = 293.932737, average = 293.601974
+room_SIDE1
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.571766
+manikin
+    convective: 223.862542
+    radiative:  -0
+    total:      223.862542
+    Temperature : min = 307.15, max = 307.15, average = 307.15
+
+yPlusRAS yplusRAS output:
+    patch room_SIDE2 y+ : min = 0.502929472, max = 8.71959578, average = 4.41542971
+    patch room_FLOOR y+ : min = 0.104467639, max = 8.85109313, average = 3.29245585
+    patch room_CEILING y+ : min = 0.628523708, max = 8.5140261, average = 4.14852807
+    patch room_BACK y+ : min = 0.35089775, max = 51.8475422, average = 7.29941029
+    patch room_SIDE1 y+ : min = 0.496835137, max = 8.58263364, average = 4.41551286
+    patch manikin y+ : min = 0.0564206317, max = 7.91975299, average = 1.18282387
+
+yPlusRASLowRe yplusRASLowRe output:
+room_SIDE2
+    y+ : min = 0.502929472, max = 8.71959578, average = 4.41542971
+    y : min = 0.000544684214, max = 0.00250000001, average = 0.00234603179
+room_FLOOR
+    y+ : min = 0.104467639, max = 8.85109313, average = 3.29245585
+    y : min = 0.000139430812, max = 0.00249999971, average = 0.00161917022
+room_CEILING
+    y+ : min = 0.628523708, max = 8.5140261, average = 4.14852807
+    y : min = 0.000647142072, max = 0.00249999973, average = 0.00231379284
+room_BACK
+    y+ : min = 0.35089775, max = 51.8475422, average = 7.29941029
+    y : min = 0.000872666798, max = 0.00549005797, average = 0.00123342378
+room_SIDE1
+    y+ : min = 0.496835137, max = 8.58263364, average = 4.41551286
+    y : min = 0.000544684643, max = 0.0025, average = 0.00234602486
+manikin
+    y+ : min = 0.0564206317, max = 7.91975299, average = 1.18282387
+    y : min = 4.97449872e-05, max = 0.00255854003, average = 0.000292020944
+
+forceCoeffs forceCoeffs1 output:
+    Cm    = -4499.15733
+    Cd    = -93.738618
+    Cl    = -8662.97967
+    Cl(f) = -8830.64716
+    Cl(r) = 167.667496
+
+Time = 6014
+
+DILUPBiCG:  Solving for Ux, Initial residual = 0.0129450127, Final residual = 0.000162733904, No Iterations 1
+DILUPBiCG:  Solving for Uy, Initial residual = 0.018500508, Final residual = 0.000209711074, No Iterations 1
+DILUPBiCG:  Solving for Uz, Initial residual = 0.0150742097, Final residual = 0.000185721097, No Iterations 1
+DILUPBiCG:  Solving for h, Initial residual = 0.000458237498, Final residual = 6.31413528e-06, No Iterations 1
+GAMG:  Solving for p_rgh, Initial residual = 0.15312653, Final residual = 0.00130260781, No Iterations 7
+time step continuity errors : sum local = 0.000357101844, global = -1.66463961e-05, cumulative = -0.000162104968
+rho max/min : 1.21717405 0.881584839
+smoothSolver:  Solving for epsilon, Initial residual = 0.0669492282, Final residual = 0.00473643113, No Iterations 4
+smoothSolver:  Solving for k, Initial residual = 0.0342495147, Final residual = 0.00274119559, No Iterations 4
+ExecutionTime = 200.57 s  ClockTime = 202 s
+
+wallHeatFlux wallHeatFlux output:
+
+Wall heat fluxes [W]
+room_SIDE2
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.573196
+room_FLOOR
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 306.377338, average = 293.506175
+room_CEILING
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 293.932361, max = 293.932535, average = 293.932415
+room_BACK
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.808985, max = 293.932772, average = 293.60197
+room_SIDE1
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.571675
+manikin
+    convective: 226.321078
+    radiative:  -0
+    total:      226.321078
+    Temperature : min = 307.15, max = 307.15, average = 307.15
+
+yPlusRAS yplusRAS output:
+    patch room_SIDE2 y+ : min = 0.724055816, max = 8.83285301, average = 4.40912635
+    patch room_FLOOR y+ : min = 0.100676341, max = 8.99175717, average = 3.26737283
+    patch room_CEILING y+ : min = 0.246979755, max = 8.24492169, average = 4.16064781
+    patch room_BACK y+ : min = 0.431096633, max = 57.8768554, average = 7.30996683
+    patch room_SIDE1 y+ : min = 0.644706852, max = 8.70855314, average = 4.40750958
+    patch manikin y+ : min = 0.0322172751, max = 7.93254818, average = 1.18835466
+
+yPlusRASLowRe yplusRASLowRe output:
+room_SIDE2
+    y+ : min = 0.724055816, max = 8.83285301, average = 4.40912635
+    y : min = 0.000544684214, max = 0.00250000001, average = 0.00234603179
+room_FLOOR
+    y+ : min = 0.100676341, max = 8.99175717, average = 3.26737283
+    y : min = 0.000139430812, max = 0.00249999971, average = 0.00161917022
+room_CEILING
+    y+ : min = 0.246979755, max = 8.24492169, average = 4.16064781
+    y : min = 0.000647142072, max = 0.00249999973, average = 0.00231379284
+room_BACK
+    y+ : min = 0.431096633, max = 57.8768554, average = 7.30996683
+    y : min = 0.000872666798, max = 0.00549005797, average = 0.00123342378
+room_SIDE1
+    y+ : min = 0.644706852, max = 8.70855314, average = 4.40750958
+    y : min = 0.000544684643, max = 0.0025, average = 0.00234602486
+manikin
+    y+ : min = 0.0322172751, max = 7.93254818, average = 1.18835466
+    y : min = 4.97449872e-05, max = 0.00255854003, average = 0.000292020944
+
+forceCoeffs forceCoeffs1 output:
+    Cm    = -4525.7722
+    Cd    = -95.2641318
+    Cl    = -8714.20748
+    Cl(f) = -8882.87594
+    Cl(r) = 168.668459
+
+Time = 6015
+
+DILUPBiCG:  Solving for Ux, Initial residual = 0.0263761569, Final residual = 0.000326486533, No Iterations 1
+DILUPBiCG:  Solving for Uy, Initial residual = 0.02730516, Final residual = 0.000277774732, No Iterations 1
+DILUPBiCG:  Solving for Uz, Initial residual = 0.0304736478, Final residual = 0.000379585227, No Iterations 1
+DILUPBiCG:  Solving for h, Initial residual = 0.000442506167, Final residual = 5.98958807e-06, No Iterations 1
+GAMG:  Solving for p_rgh, Initial residual = 0.175447277, Final residual = 0.00116917555, No Iterations 7
+time step continuity errors : sum local = 0.000473152842, global = 2.00671366e-05, cumulative = -0.000142037832
+rho max/min : 1.43820853 0.896658867
+smoothSolver:  Solving for epsilon, Initial residual = 0.0646063092, Final residual = 0.00456882844, No Iterations 4
+smoothSolver:  Solving for k, Initial residual = 0.0335576755, Final residual = 0.00249422641, No Iterations 4
+ExecutionTime = 213.82 s  ClockTime = 215 s
+
+wallHeatFlux wallHeatFlux output:
+
+Wall heat fluxes [W]
+room_SIDE2
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.573003
+room_FLOOR
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 306.391697, average = 293.509739
+room_CEILING
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 293.932361, max = 293.932534, average = 293.932415
+room_BACK
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.799001, max = 293.932774, average = 293.601908
+room_SIDE1
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.571545
+manikin
+    convective: 228.94781
+    radiative:  -0
+    total:      228.94781
+    Temperature : min = 307.15, max = 307.15, average = 307.15
+
+yPlusRAS yplusRAS output:
+    patch room_SIDE2 y+ : min = 0.56952202, max = 8.9808082, average = 4.43958309
+    patch room_FLOOR y+ : min = 0.0984827534, max = 9.16378921, average = 3.29296823
+    patch room_CEILING y+ : min = 0.544479434, max = 8.49515685, average = 4.18726398
+    patch room_BACK y+ : min = 0.362447913, max = 59.1443676, average = 7.56633743
+    patch room_SIDE1 y+ : min = 0.413489339, max = 8.87697304, average = 4.43528679
+    patch manikin y+ : min = 0.031165816, max = 7.95316349, average = 1.1958852
+
+yPlusRASLowRe yplusRASLowRe output:
+room_SIDE2
+    y+ : min = 0.56952202, max = 8.9808082, average = 4.43958309
+    y : min = 0.000544684214, max = 0.00250000001, average = 0.00234603179
+room_FLOOR
+    y+ : min = 0.0984827534, max = 9.16378921, average = 3.29296823
+    y : min = 0.000139430812, max = 0.00249999971, average = 0.00161917022
+room_CEILING
+    y+ : min = 0.544479434, max = 8.49515685, average = 4.18726398
+    y : min = 0.000647142072, max = 0.00249999973, average = 0.00231379284
+room_BACK
+    y+ : min = 0.362447913, max = 59.1443676, average = 7.56633743
+    y : min = 0.000872666798, max = 0.00549005797, average = 0.00123342378
+room_SIDE1
+    y+ : min = 0.413489339, max = 8.87697304, average = 4.43528679
+    y : min = 0.000544684643, max = 0.0025, average = 0.00234602486
+manikin
+    y+ : min = 0.031165816, max = 7.95316349, average = 1.1958852
+    y : min = 4.97449872e-05, max = 0.00255854003, average = 0.000292020944
+
+forceCoeffs forceCoeffs1 output:
+    Cm    = -4491.55983
+    Cd    = -93.1963313
+    Cl    = -8648.36328
+    Cl(f) = -8815.74147
+    Cl(r) = 167.378185
+
+Time = 6016
+
+DILUPBiCG:  Solving for Ux, Initial residual = 0.0331217714, Final residual = 0.000375132746, No Iterations 1
+DILUPBiCG:  Solving for Uy, Initial residual = 0.0334497806, Final residual = 0.000375660398, No Iterations 1
+DILUPBiCG:  Solving for Uz, Initial residual = 0.0378696745, Final residual = 0.000424300331, No Iterations 1
+DILUPBiCG:  Solving for h, Initial residual = 0.000416838813, Final residual = 5.60046878e-06, No Iterations 1
+GAMG:  Solving for p_rgh, Initial residual = 0.272985716, Final residual = 0.00223529474, No Iterations 7
+time step continuity errors : sum local = 0.000656822218, global = 3.46734388e-05, cumulative = -0.000107364393
+rho max/min : 1.86597918 1.14686072
+smoothSolver:  Solving for epsilon, Initial residual = 0.0605816732, Final residual = 0.00415980383, No Iterations 4
+smoothSolver:  Solving for k, Initial residual = 0.0356643961, Final residual = 0.00275667254, No Iterations 4
+ExecutionTime = 227.34 s  ClockTime = 228 s
+
+wallHeatFlux wallHeatFlux output:
+
+Wall heat fluxes [W]
+room_SIDE2
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.572852
+room_FLOOR
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 306.401976, average = 293.513311
+room_CEILING
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 293.932361, max = 293.932534, average = 293.932415
+room_BACK
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.799713, max = 293.932798, average = 293.601928
+room_SIDE1
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.571453
+manikin
+    convective: 231.769201
+    radiative:  -0
+    total:      231.769201
+    Temperature : min = 307.15, max = 307.15, average = 307.15
+
+yPlusRAS yplusRAS output:
+    patch room_SIDE2 y+ : min = 0.455886059, max = 9.11984572, average = 4.48884528
+    patch room_FLOOR y+ : min = 0.101594383, max = 9.29987145, average = 3.35845415
+    patch room_CEILING y+ : min = 0.403828801, max = 9.22141107, average = 4.20044656
+    patch room_BACK y+ : min = 0.307174621, max = 49.6730592, average = 8.10074844
+    patch room_SIDE1 y+ : min = 0.474330987, max = 9.03848967, average = 4.4791386
+    patch manikin y+ : min = 0.0492181991, max = 7.92420781, average = 1.19690833
+
+yPlusRASLowRe yplusRASLowRe output:
+room_SIDE2
+    y+ : min = 0.455886059, max = 9.11984572, average = 4.48884528
+    y : min = 0.000544684214, max = 0.00250000001, average = 0.00234603179
+room_FLOOR
+    y+ : min = 0.101594383, max = 9.29987145, average = 3.35845415
+    y : min = 0.000139430812, max = 0.00249999971, average = 0.00161917022
+room_CEILING
+    y+ : min = 0.403828801, max = 9.22141107, average = 4.20044656
+    y : min = 0.000647142072, max = 0.00249999973, average = 0.00231379284
+room_BACK
+    y+ : min = 0.307174621, max = 49.6730592, average = 8.10074844
+    y : min = 0.000872666798, max = 0.00549005797, average = 0.00123342378
+room_SIDE1
+    y+ : min = 0.474330987, max = 9.03848967, average = 4.4791386
+    y : min = 0.000544684643, max = 0.0025, average = 0.00234602486
+manikin
+    y+ : min = 0.0492181991, max = 7.92420781, average = 1.19690833
+    y : min = 4.97449872e-05, max = 0.00255854003, average = 0.000292020944
+
+forceCoeffs forceCoeffs1 output:
+    Cm    = -4446.36371
+    Cd    = -90.6472878
+    Cl    = -8561.38186
+    Cl(f) = -8727.05463
+    Cl(r) = 165.672776
+
+Time = 6017
+
+DILUPBiCG:  Solving for Ux, Initial residual = 0.0440282592, Final residual = 0.000562984342, No Iterations 1
+DILUPBiCG:  Solving for Uy, Initial residual = 0.0409702092, Final residual = 0.000402541637, No Iterations 1
+DILUPBiCG:  Solving for Uz, Initial residual = 0.0504062991, Final residual = 0.000643179023, No Iterations 1
+DILUPBiCG:  Solving for h, Initial residual = 0.000382763464, Final residual = 5.49951704e-06, No Iterations 1
+GAMG:  Solving for p_rgh, Initial residual = 0.205430229, Final residual = 0.00159405288, No Iterations 7
+time step continuity errors : sum local = 0.000840029159, global = -2.9589341e-05, cumulative = -0.000136953734
+rho max/min : 1.60782863 0.663270658
+smoothSolver:  Solving for epsilon, Initial residual = 0.0518807169, Final residual = 0.00364982014, No Iterations 4
+smoothSolver:  Solving for k, Initial residual = 0.0346270908, Final residual = 0.00274184061, No Iterations 4
+ExecutionTime = 240.81 s  ClockTime = 242 s
+
+wallHeatFlux wallHeatFlux output:
+
+Wall heat fluxes [W]
+room_SIDE2
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.572775
+room_FLOOR
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 306.403685, average = 293.516925
+room_CEILING
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 293.932361, max = 293.932535, average = 293.932416
+room_BACK
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.809253, max = 293.932866, average = 293.602023
+room_SIDE1
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.571436
+manikin
+    convective: 234.686515
+    radiative:  -0
+    total:      234.686515
+    Temperature : min = 307.15, max = 307.15, average = 307.15
+
+yPlusRAS yplusRAS output:
+    patch room_SIDE2 y+ : min = 0.541217089, max = 9.1482188, average = 4.44063886
+    patch room_FLOOR y+ : min = 0.0935479978, max = 9.38606415, average = 3.30534662
+    patch room_CEILING y+ : min = 0.578535591, max = 8.86930407, average = 4.17423337
+    patch room_BACK y+ : min = 0.315089629, max = 48.7862349, average = 8.09481245
+    patch room_SIDE1 y+ : min = 0.390040007, max = 9.08598279, average = 4.43182195
+    patch manikin y+ : min = 0.0406098286, max = 7.87698031, average = 1.1922128
+
+yPlusRASLowRe yplusRASLowRe output:
+room_SIDE2
+    y+ : min = 0.541217089, max = 9.1482188, average = 4.44063886
+    y : min = 0.000544684214, max = 0.00250000001, average = 0.00234603179
+room_FLOOR
+    y+ : min = 0.0935479978, max = 9.38606415, average = 3.30534662
+    y : min = 0.000139430812, max = 0.00249999971, average = 0.00161917022
+room_CEILING
+    y+ : min = 0.578535591, max = 8.86930407, average = 4.17423337
+    y : min = 0.000647142072, max = 0.00249999973, average = 0.00231379284
+room_BACK
+    y+ : min = 0.315089629, max = 48.7862349, average = 8.09481245
+    y : min = 0.000872666798, max = 0.00549005797, average = 0.00123342378
+room_SIDE1
+    y+ : min = 0.390040007, max = 9.08598279, average = 4.43182195
+    y : min = 0.000544684643, max = 0.0025, average = 0.00234602486
+manikin
+    y+ : min = 0.0406098286, max = 7.87698031, average = 1.1922128
+    y : min = 4.97449872e-05, max = 0.00255854003, average = 0.000292020944
+
+forceCoeffs forceCoeffs1 output:
+    Cm    = -4515.32578
+    Cd    = -95.7391315
+    Cl    = -8694.09166
+    Cl(f) = -8862.37161
+    Cl(r) = 168.279953
+
+Time = 6018
+
+DILUPBiCG:  Solving for Ux, Initial residual = 0.0627415869, Final residual = 0.000770331682, No Iterations 1
+DILUPBiCG:  Solving for Uy, Initial residual = 0.0792482259, Final residual = 0.000981925154, No Iterations 1
+DILUPBiCG:  Solving for Uz, Initial residual = 0.0709180921, Final residual = 0.000858308396, No Iterations 1
+DILUPBiCG:  Solving for h, Initial residual = 0.000373546218, Final residual = 5.54340893e-06, No Iterations 1
+GAMG:  Solving for p_rgh, Initial residual = 0.308487174, Final residual = 4.24293652e+87, No Iterations 50
+time step continuity errors : sum local = 1.92610177e+87, global = -3.24648182e+86, cumulative = -3.24648182e+86
+rho max/min : 1.25484087 -0.813261633
+smoothSolver:  Solving for epsilon, Initial residual = 1, Final residual = 6.30687443e+63, No Iterations 20
+smoothSolver:  Solving for k, Initial residual = 1, Final residual = 8.37239641e-07, No Iterations 1
+ExecutionTime = 270.61 s  ClockTime = 272 s
+
+wallHeatFlux wallHeatFlux output:
+
+Wall heat fluxes [W]
+room_SIDE2
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.572604
+room_FLOOR
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 306.414223, average = 293.520476
+room_CEILING
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 293.932361, max = 293.932535, average = 293.932416
+room_BACK
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.807767, max = 293.932876, average = 293.60205
+room_SIDE1
+    convective: 0
+    radiative:  -0
+    total:      0
+    Temperature : min = 292.823844, max = 293.933263, average = 293.571317
+manikin
+    convective: 237.534023
+    radiative:  -0
+    total:      237.534023
+    Temperature : min = 307.15, max = 307.15, average = 307.15
+
+yPlusRAS yplusRAS output:
+    patch room_SIDE2 y+ : min = 8.16130027e+37, max = 1.63115943e+41, average = 5.92071448e+39
+    patch room_FLOOR y+ : min = 3.42578118e+37, max = 1.109886e+41, average = 6.83245194e+39
+    patch room_CEILING y+ : min = 2.94776773e+37, max = 8.66949461e+39, average = 2.67269088e+39
+    patch room_BACK y+ : min = 2.79285342e+38, max = 8.59881583e+43, average = 3.234882e+41
+    patch room_SIDE1 y+ : min = 8.00571714e+37, max = 2.69816546e+41, average = 1.14764881e+40
+    patch manikin y+ : min = 3.87773297e+36, max = 1.73538762e+39, average = 1.99611584e+38
+
+yPlusRASLowRe yplusRASLowRe output:
+room_SIDE2
+    y+ : min = 8.16130027e+37, max = 1.63115943e+41, average = 5.92071448e+39
+    y : min = 0.000544684214, max = 0.00250000001, average = 0.00234603179
+room_FLOOR
+    y+ : min = 3.42578118e+37, max = 1.109886e+41, average = 6.83245194e+39
+    y : min = 0.000139430812, max = 0.00249999971, average = 0.00161917022
+room_CEILING
+    y+ : min = 2.94776773e+37, max = 8.66949461e+39, average = 2.67269088e+39
+    y : min = 0.000647142072, max = 0.00249999973, average = 0.00231379284
+room_BACK
+    y+ : min = 2.79285342e+38, max = 8.59881583e+43, average = 3.234882e+41
+    y : min = 0.000872666798, max = 0.00549005797, average = 0.00123342378
+room_SIDE1
+    y+ : min = 8.00571714e+37, max = 2.69816546e+41, average = 1.14764881e+40
+    y : min = 0.000544684643, max = 0.0025, average = 0.00234602486
+manikin
+    y+ : min = 3.87773297e+36, max = 1.73538762e+39, average = 1.99611584e+38
+    y : min = 4.97449872e-05, max = 0.00255854003, average = 0.000292020944
+
+forceCoeffs forceCoeffs1 output:
+    Cm    = -1.41541437e+80
+    Cd    = -7.98186592e+78
+    Cl    = -2.73512206e+80
+    Cl(f) = -2.7829754e+80
+    Cl(r) = 4.78533411e+78
+
+Time = 6019
+
