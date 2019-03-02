@@ -1,0 +1,122 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    class       polyBoundaryMesh;
+    location    "constant/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+10
+(
+    defaultFaces
+    {
+        type            empty;
+        inGroups        1(empty);
+        nFaces          0;
+        startFace       7321302;
+    }
+    room_SIDE2
+    {
+        type            wall;
+        inGroups        
+2
+(
+RoomWallGroup
+wall
+)
+;
+        nFaces          9999;
+        startFace       7321302;
+    }
+    room_FLOOR
+    {
+        type            wall;
+        inGroups        
+2
+(
+RoomWallGroup
+wall
+)
+;
+        nFaces          7799;
+        startFace       7331301;
+    }
+    room_CEILING
+    {
+        type            wall;
+        inGroups        
+2
+(
+RoomWallGroup
+wall
+)
+;
+        nFaces          4896;
+        startFace       7339100;
+    }
+    room_BACK
+    {
+        type            wall;
+        inGroups        
+2
+(
+RoomWallGroup
+wall
+)
+;
+        nFaces          18282;
+        startFace       7343996;
+    }
+    room_SIDE1
+    {
+        type            wall;
+        inGroups        
+2
+(
+RoomWallGroup
+wall
+)
+;
+        nFaces          9999;
+        startFace       7362278;
+    }
+    room_INLET
+    {
+        type            patch;
+        inGroups        1(RoomInletGroup);
+        nFaces          5872;
+        startFace       7372277;
+    }
+    room_OUTLET2
+    {
+        type            patch;
+        inGroups        1(RoomOutletGroup);
+        nFaces          316;
+        startFace       7378149;
+    }
+    room_OUTLET1
+    {
+        type            patch;
+        inGroups        1(RoomOutletGroup);
+        nFaces          314;
+        startFace       7378465;
+    }
+    manikin
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          174548;
+        startFace       7378779;
+    }
+)
+
+// ************************************************************************* //
