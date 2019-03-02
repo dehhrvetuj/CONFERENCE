@@ -1,0 +1,113 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+/*   Windows 32 and 64 bit porting by blueCAPE: http://www.bluecape.com.pt   *\
+|  Based on Windows porting (2.0.x v4) by Symscape: http://www.symscape.com   |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     buoyantSimpleFoam;
+
+startFrom       latestTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         4000;
+
+deltaT          1;
+
+writeControl    timeStep;
+
+writeInterval   1000;
+
+purgeWrite      4;
+
+writePrecision  9;
+
+writeCompression on;
+
+timeFormat      general;
+
+writeFormat     binary;
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+
+libs            ( "libcompressibleRASModels.so" "libthermalBaffleModels.so" );
+
+
+
+functions
+{
+/*
+    wallHeatFlux
+    {
+        functionObjectLibs ( "libwallHeatFluxFunctionObjects.so" );
+        type            wallHeatFlux;
+        name            wallHeatFlux;
+        outputControl   outputTime;
+        outputInterval  1;
+        log             yes;
+    }
+*/
+/*
+    probes
+    {
+        functionObjectLibs ( "libsampling.so" );
+        type            probes;
+        name            probes;
+        outputControl   timeStep;
+        outputInterval  1;
+
+        fields
+        (
+            p
+            U
+            T
+
+        );
+
+
+        probeLocations
+        (
+            ( 25.25 2 0.1 )
+
+        );
+
+    }
+
+*/
+/*
+	yplusRAS
+	{
+		type yPlusRAS;
+		functionObjectLibs ("libutilityFunctionObjects.so");
+		enabled true;
+
+		outputControl	outputTime;
+		outputInterval	100;
+
+		log false;
+	}
+*/
+
+}
+
+
+// ************************************************************************* //

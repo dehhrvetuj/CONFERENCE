@@ -1,0 +1,290 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+/*   Windows 32 and 64 bit porting by blueCAPE: http://www.bluecape.com.pt   *\
+|  Based on Windows porting (2.0.x v4) by Symscape: http://www.symscape.com   |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      snappyHexMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+castellatedMesh	true;
+
+snap            true;
+
+addLayers       false;
+
+
+geometry
+{
+
+    room.stl
+    {
+        type            triSurfaceMesh;
+        name            room;
+    }
+	
+    manikin.stl
+    {
+        type            triSurfaceMesh;
+        name            manikin;
+    }
+	
+    refine1.stl
+    {
+        type            triSurfaceMesh;
+        name            refine1;
+    }
+	
+    refine2.stl
+    {
+        type            triSurfaceMesh;
+        name            refine2;
+    }	
+}
+
+
+
+castellatedMeshControls
+{
+    allowFreeStandingZoneFaces true;
+    maxGlobalCells  9000000;
+    maxLocalCells   3000000;
+    minRefinementCells 20;
+    nCellsBetweenLevels 3;
+    resolveFeatureAngle 30;
+    locationInMesh  ( 0 1 2 );
+    features        ( { file "room.eMesh" ; level 1 ; } 
+						{ file "manikin.eMesh" ; level 4 ; } 
+					);
+
+    refinementSurfaces
+    {
+        room
+        {
+            level           ( 0 1 );
+
+            regions
+            {
+		
+				"(FLOOR|CEILING|BACK|SIDE).*"
+				{
+					level (1 1);
+					
+					patchInfo
+                    {
+                        type            wall;
+						inGroups (RoomWallGroup);
+                    }
+				}
+				
+				"INLET.*"
+				{
+					level (1 1);
+					
+					patchInfo
+                    {
+                        type            patch;
+						inGroups (RoomInletGroup);
+                    }
+				}				
+
+				"(OUTLET1|OUTLET2).*"
+				{
+					level (2 2);
+					
+					patchInfo
+                    {
+                        type            patch;
+						inGroups (RoomOutletGroup);
+                    }					
+				}
+			}
+		}
+				
+		manikin
+        {
+            level           ( 4 5 );
+
+            regions
+            {		
+				"manikin.*"
+				{
+					level (4 5);
+					
+					patchInfo
+                    {
+                        type            wall;
+                    }					
+				}
+			}
+			
+		}
+    }
+
+
+    refinementRegions
+    {
+
+        room
+        {
+            mode            distance;
+
+            levels
+            (
+                ( 0.08 1 )
+
+            );
+
+        }
+	        
+		manikin
+        {
+            mode            distance;
+
+            levels
+            (
+				( 0.01 4 )
+				( 0.03 3 )
+				( 0.08 2 )
+                ( 0.15 1 )
+
+            );
+
+        }
+		
+		// refine1
+        // {
+            // mode            inside;
+
+            // levels
+            // (
+				// ( 1E15 2 )
+
+            // );
+
+        // }
+		
+		// refine2
+        // {
+            // mode            inside;
+
+            // levels
+            // (
+				// ( 1E15 2 )
+
+            // );
+
+        // }		
+		
+    }
+}
+
+
+
+snapControls
+{
+    explicitFeatureSnap true;
+    implicitFeatureSnap false;
+    multiRegionFeatureSnap true;
+    nFeatureSnapIter 20;
+    nRelaxIter      8;
+    nSmoothPatch    5;
+    nSolveIter      300;
+    tolerance       4;
+}
+
+
+
+addLayersControls
+{
+    additionalReporting true;
+    featureAngle    180;
+    maxFaceThicknessRatio 0.8;
+    maxThicknessToMedialRatio 0.9;
+    minMedianAxisAngle 90;
+    minThickness    0.01;
+    nBufferCellsNoExtrude 0;
+    nGrow           1;
+    nLayerIter      50;
+    nRelaxIter      10;
+    nRelaxedIter    20;
+    nSmoothNormals  3;
+    nSmoothSurfaceNormals 20;
+    nSmoothThickness 8;
+    slipFeatureAngle 80;
+    
+    relativeSizes   true;
+    // thickness       0.7;
+    expansionRatio 1.2;
+    finalLayerThickness 0.2;	
+
+    layers
+    {
+/*		".*(FLOOR|CEILING|BACK|SIDE|OUTLET).*"
+		{
+			nSurfaceLayers 4;
+		}
+*/
+
+/*		".*(BACK|OUTLET1|OUTLET2).*"
+		{
+			nSurfaceLayers 4;
+		}	*/	
+
+		".*manikin.*"
+		{
+			nSurfaceLayers 4;
+		}
+    }
+}
+
+meshQualityControls
+{
+    errorReduction  0.75;
+    maxBoundarySkewness 20;
+    maxConcave      80;
+    maxInternalSkewness 4;
+    maxNonOrtho     65;
+    minArea         1e-030;
+    minDeterminant  0.001;
+    minFaceWeight   0.02;
+    minTetQuality   1e-030;
+    minTriangleTwist -1;
+    minTwist        0.02;
+    minVol          1e-013;
+    minVolCollapseRatio 0.5;
+    minVolRatio     0.01;
+    nSmoothScale    4;
+
+
+
+    relaxed
+    {
+        maxBoundarySkewness -1;
+        maxInternalSkewness -1;
+        maxNonOrtho     80;
+        minDeterminant  -1;
+        minFaceWeight   0;
+        minTetQuality   -1;
+    }
+
+}
+
+
+debug           0;
+
+mergeTolerance  1e-007;
+
+
+// ************************************************************************* //

@@ -1,0 +1,110 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    default         	steadyState;
+}
+
+gradSchemes
+{
+    default         	Gauss linear;
+    grad(U)             cellMDLimited Gauss linear 1;
+}
+
+divSchemes
+{
+    default         	none;
+
+    div(phi,U)      	bounded Gauss linearUpwindV grad(U);
+    //div(phi,U)  		bounded Gauss limitedLinearV 0.2;
+    //div(phi,U)        bounded Gauss upwind;
+
+	div(phi,h)          bounded Gauss linearUpwind grad(h);
+	//div(phi,h)  		bounded Gauss limitedLinear  0.2;
+	//div(phi,h)      	bounded Gauss upwind;
+
+	//div(phi,T)      	bounded Gauss linearUpwind grad(h);
+	//div(phi,T)      	bounded Gauss upwind;
+
+
+	//div(phi,k)      	bounded Gauss linearUpwind grad(k);
+    //div(phi,epsilon) 	bounded Gauss linearUpwind grad(epsilon);
+    //div(phi,omega) 		bounded Gauss linearUpwind grad(omega);
+    
+	div(phi,k)      	bounded Gauss upwind;
+    div(phi,epsilon) 	bounded Gauss upwind;
+    div(phi,omega) 	bounded Gauss upwind;
+    div(phi,K)      	bounded Gauss upwind;
+    //div(phi,R)		bounded Gauss upwind;
+    //div(phi,muTilda) 	bounded Gauss upwind;
+	
+    div(phi,v2)			bounded Gauss upwind;
+    
+    
+    //div(Ji,Ii_h)    	bounded Gauss linearUpwind grad(Ii_h);
+    div(Ji,Ii_h)        bounded Gauss upwind;
+
+	
+    div((muEff*dev2(T(grad(U))))) 	Gauss linear;
+    div((nuEff*dev(T(grad(U))))) 	Gauss linear;
+   	
+        
+}
+
+laplacianSchemes
+{
+    default         				none;
+
+    laplacian(muEff,U) 				Gauss linear limited 0.5;
+    laplacian(nuEff,U) 				Gauss linear limited 0.5;	
+    
+	laplacian(rhorAUf,p_rgh)		Gauss linear limited 0.5;
+	laplacian(rAUf,p_rgh)			Gauss linear limited 0.5;
+    
+	laplacian(alphaEff,h)			Gauss linear limited 0.5;
+	laplacian(alphaEff,T)			Gauss linear limited 0.5;
+    
+	laplacian(DkEff,k)				Gauss linear limited 0.5;
+    laplacian(DepsilonEff,epsilon)	Gauss linear limited 0.5;
+    laplacian(DomegaEff,omega) 		Gauss linear limited 0.5;
+    
+    laplacian(1,p)					Gauss linear limited 0.5;
+    
+    laplacian(rho,f)				Gauss linear limited 0.5;
+    laplacian(DkEff,v2)				Gauss linear limited 0.5;
+        
+}
+
+interpolationSchemes
+{
+    default         linear;
+}
+
+snGradSchemes
+{
+    default         limited 0.5;
+}
+
+fluxRequired
+{
+    default         no;
+    p_rgh;
+}
+
+
+// ************************************************************************* //

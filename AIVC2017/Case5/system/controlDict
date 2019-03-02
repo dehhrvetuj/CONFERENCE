@@ -1,0 +1,157 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+/*   Windows 32 and 64 bit porting by blueCAPE: http://www.bluecape.com.pt   *\
+|  Based on Windows porting (2.0.x v4) by Symscape: http://www.symscape.com   |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     buoyantSimpleFoam;
+
+startFrom       startTime;
+
+startTime       7000;
+
+stopAt          endTime;
+
+endTime         8000;
+
+deltaT          1;
+
+writeControl    timeStep;
+
+writeInterval   3500;
+
+purgeWrite      1;
+
+writePrecision  9;
+
+writeCompression on;
+
+timeFormat      general;
+
+writeFormat     binary;
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+
+libs            ( "libcompressibleRASModels.so" "libthermalBaffleModels.so" );
+
+
+
+functions
+{
+    wallHeatFlux
+    {
+        functionObjectLibs ( "libwallHeatFluxFunctionObjects.so" );
+        type            wallHeatFlux;
+        name            wallHeatFlux;
+        Qr              Qr;        
+        outputControl   outputTime;
+        outputInterval  1;
+        log             yes;
+    }
+/*
+    probes
+    {
+        functionObjectLibs ( "libsampling.so" );
+        type            probes;
+        name            probes;
+        outputControl   timeStep;
+        outputInterval  1;
+
+        fields
+        (
+            p
+            U
+            T
+
+        );
+
+
+        probeLocations
+        (
+            ( 25.25 2 0.1 )
+
+        );
+
+    }
+
+*/
+
+    //wallShearStress1
+    //{
+        //type        wallShearStress;
+        //functionObjectLibs ("libutilityFunctionObjects.so");
+        
+        //patches     (".*manikin.*");
+    //}	
+    
+    
+    
+   	yplusRAS
+	{
+		type yPlusRAS;
+		functionObjectLibs ("libutilityFunctionObjects.so");
+		enabled true;
+
+		outputControl	outputTime;
+		outputInterval	1;
+
+		log false;
+	}
+	
+	yplusRASLowRe
+	{
+		type yPlusRASLowRe;
+		functionObjectLibs ("libYPlusRASLowReFunctionObjects.so");
+		enabled true;
+
+		outputControl	outputTime;
+		outputInterval	1;
+
+		log true;
+	}
+    
+	forceCoeffs1
+	{
+		type        forceCoeffs;
+
+		functionObjectLibs ( "libforces.so" );
+
+		outputControl   timeStep;
+		timeInterval    1;
+
+		log         yes;
+
+		patches     ( ".*manikin.*" );
+		rhoName     rho;      // Indicates incompressible
+		rhoInf      1.25;           // Redundant for incompressible
+		liftDir     (0 0 1);
+		dragDir     (0 1 0);
+		CofR        (0.72 0 0);  // Axle midpoint on ground
+		pitchAxis   (0 1 0);
+		magUInf     0.27;
+		lRef        1.42;        // Wheelbase length
+		Aref        0.75;        // Estimated
+
+	}  
+	
+}
+
+
+// ************************************************************************* //

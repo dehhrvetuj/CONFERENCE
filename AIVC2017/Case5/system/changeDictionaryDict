@@ -1,0 +1,110 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      changeDictionaryDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dictionaryReplacement
+{
+
+    //~ T
+    //~ {
+        //~ boundaryField
+        //~ {
+			//~ ".*(FLOOR|CEILING|BACK|SIDE).*"
+			//~ {
+				//~ type            compressible::turbulentHeatFluxTemperature;
+				//~ heatSource      flux;
+				//~ q               uniform 0;
+				//~ kappa           fluidThermo;
+				//~ kappaName       none;
+				//~ Qr              Qr;
+				//~ value           uniform 293.55;
+			//~ }
+        //~ }
+    //~ }
+  
+    //T
+    //{
+		//boundaryField
+		//{
+			//".*(FLOOR|CEILING|BACK|SIDE).*"
+			//{
+				////type		fixedValue;
+				
+				//type            externalWallHeatFluxTemperature;
+				//kappa           fluidThermo;
+				//Ta              uniform 293.55;
+				//h               uniform 10.0;
+				//thicknessLayers (0.012);
+				//kappaLayers     (0.15);
+				//value           uniform 293.55;
+				//kappaName       none;
+				//Qr          	none;
+			//}
+		//}
+	//}
+    
+    //k
+    //{	
+		//boundaryField
+		//{
+			//".*(FLOOR|CEILING|BACK|SIDE|manikin).*"
+			//{
+				//type            fixedValue; //compressible::kLowReWallFunction;
+				//value           uniform 1E-12;
+			//}			
+			
+		//}
+	//}
+	
+	//epsilon
+	//{
+		//boundaryField
+		//{
+			//".*(FLOOR|CEILING|BACK|SIDE|manikin).*"
+			//{
+				//type            zeroGradient; //compressible::epsilonLowReWallFunction;
+				//value           uniform 1E-4;
+			//}			
+		//}	
+	//}   
+   
+    //mut
+    //{
+		//boundaryField
+		//{
+		    //".*(FLOOR|CEILING|BACK|SIDE|manikin).*"
+		    //{
+		        //type            mutUSpaldingWallFunction;
+		        //value           uniform 0;
+		    //}
+
+		//}
+	//}
+	
+	alphat
+	{
+		boundaryField
+		{
+			".*(FLOOR|CEILING|BACK|SIDE|manikin).*"
+			{
+				type            compressible::alphatJayatillekeWallFunction;
+				Prt             0.85;
+				value           uniform 0;		
+			}
+		}
+	}
+
+    
+}
